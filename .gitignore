@@ -1,0 +1,10 @@
+# Microsoft Office temporary files
+~$*.docx
+~$*.pptx
+~$*.xlsx
+~$*.xlsm
+
+# Local temporary and backup files
+*.tmp
+*.bak
+*.swp
