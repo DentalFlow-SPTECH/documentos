@@ -67,8 +67,11 @@ e_doc/
 ├── 2_BPM/
 ├── 3_MER/
 ├── 4_Class/
-└── z_mis/
-    └── a_reference/
+├── z_mis/
+│   └── a_reference/
+└── _brain/
+    ├── module/
+    └── task/
 ```
 
 Esta pasta Git representa `e_doc` no workspace do projeto. Os prefixos numéricos definem as fases de leitura; os prefixos alfabéticos ordenam os assuntos dentro de cada fase.
@@ -98,6 +101,19 @@ Pastas sem artefatos têm `.gitkeep` para que a estrutura seja preservada pelo G
 
 - [Especificação de design](1_SPC/c_design/dental_flow_ap_clinic_SPC_design.md)
 - [Planilha de briefing de front-end](0_Context/b_brief/dental_flow_ap_clinic_SPC_frontend_brief.xlsx)
+- [Decisão da stack do frontend](0_Context/a_governance/dental_flow_ap_clinic_SPC_frontend_stack_decision.md)
+- [Arquitetura do frontend](1_SPC/b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md)
+- [Plano e evidências da refatoração](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md)
+- [Critérios de validação](1_SPC/d_quality/dental_flow_ap_clinic_SPC_frontend_refactor_validation.md)
+- [Execução e verificação local](1_SPC/e_operation/dental_flow_ap_clinic_SPC_frontend_execution.md)
+
+## Brain e Obsidian
+
+Abra esta pasta `documentos` como vault no Obsidian. O [brain](_brain/dental_flow_ap_clinic_SPC_index.md) contém o índice, contexto curto, fichas de módulo e retomada da tarefa; as especificações completas permanecem nas fases existentes. Não crie um segundo vault dentro de `_brain`.
+
+Use links Markdown relativos entre notas para conservar a navegação no Obsidian e no GitHub. Backlinks e grafo são recursos nativos suficientes para a primeira etapa. `.obsidian/` e `.trash/` são locais e ignorados pelo Git; configurações pessoais não fazem parte da entrega.
+
+Leia apenas as fontes pertinentes à tarefa. A economia de contexto depende dessa leitura seletiva e da manutenção das notas, e não da instalação do Obsidian. O brain não recebe transcrições, credenciais ou cópias completas de especificações. Seu andamento está no plano de refatoração.
 
 ## Regras de manutenção
 

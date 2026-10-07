@@ -1,5 +1,7 @@
 # Dental Flow
 
+> Atualização técnica de 06/10/2026: o usuário confirmou React + Vite + JavaScript/JSX + CSS Modules + MVVM. A migração está registrada no [plano de execução](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md) e na [arquitetura](../b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md). Isso não altera o status de aprovação dos requisitos clínicos ou dos exemplos abaixo. A interface existente usa IBM Plex Sans; as referências originais a Inter são mantidas como origem da proposta, não como fonte aplicada no frontend atual.
+
 ## 1. Visão Geral
 
 Dental Flow é um projeto acadêmico de sistema de gestão para uma clínica odontológica, com foco em orçamento e gestão de estoque, conforme a definição do solicitante. O documento v1 também descreve agenda, pacientes, doutores, financeiro, administração, autenticação e recuperação de acesso. A proposta funcional é relacionar esses módulos, reduzir o recadastro de informações e preservar o histórico clínico, financeiro e administrativo.
@@ -95,19 +97,19 @@ Contrastes calculados pela luminância relativa sRGB. AA para texto normal exige
 
 ### Tipografia
 
-A referência preenchida em Paleta de Cores, linha 46, é H1 em Inter, peso 700, tamanho 32 e altura de linha 1,2, com um H1 por tela. Os demais estilos são derivados dessa referência, sem inferir a fonte do logotipo.
+A referência de origem em Paleta de Cores, linha 46, cita H1 em Inter, peso 700, tamanho 32 e altura de linha 1,2, com um H1 por tela. O frontend atual adotou IBM Plex Sans; a tabela abaixo usa essa família e conserva os demais valores derivados da referência, sem inferir a fonte do logotipo. A conferência integral dos valores de layout com os tokens atuais continua pendente.
 
 | Elemento / token | Fonte | Peso | Tamanho (px e rem) | Altura de linha | Uso |
 | --- | --- | --- | --- | --- | --- |
-| fonte-base (derivado) | Inter; fallback sans-serif | 400 | 16 px / 1 rem | 1,5 / 24 px | Base de leitura e conversão |
-| texto-h1 (derivado) | Inter; fallback sans-serif | 700 | 32 px / 2 rem | 1,2 / 38,4 px | Um título principal por tela |
-| texto-h2 (derivado) | Inter; fallback sans-serif | 700 | 24 px / 1,5 rem | 1,25 / 30 px | Seções principais |
-| texto-h3 (derivado) | Inter; fallback sans-serif | 600 | 20 px / 1,25 rem | 1,4 / 28 px | Grupos de campos e painéis |
-| texto-corpo (derivado) | Inter; fallback sans-serif | 400 | 16 px / 1 rem | 1,5 / 24 px | Conteúdo, campos e tabelas |
-| texto-rotulo (derivado) | Inter; fallback sans-serif | 600 | 16 px / 1 rem | 1,5 / 24 px | Rótulos de formulário |
-| texto-botao (derivado) | Inter; fallback sans-serif | 600 | 16 px / 1 rem | 1,5 / 24 px | Ações |
-| texto-ajuda (derivado) | Inter; fallback sans-serif | 400 | 14 px / 0,875 rem | 1,5 / 21 px | Ajuda e metadados |
-| texto-valor (derivado) | Inter; fallback sans-serif | 700 | 24 px / 1,5 rem | 1,25 / 30 px | Totais e indicadores financeiros |
+| fonte-base (derivado) | IBM Plex Sans; fallback sans-serif | 400 | 16 px / 1 rem | 1,5 / 24 px | Base de leitura e conversão |
+| texto-h1 (derivado) | IBM Plex Sans; fallback sans-serif | 700 | 32 px / 2 rem | 1,2 / 38,4 px | Um título principal por tela |
+| texto-h2 (derivado) | IBM Plex Sans; fallback sans-serif | 700 | 24 px / 1,5 rem | 1,25 / 30 px | Seções principais |
+| texto-h3 (derivado) | IBM Plex Sans; fallback sans-serif | 600 | 20 px / 1,25 rem | 1,4 / 28 px | Grupos de campos e painéis |
+| texto-corpo (derivado) | IBM Plex Sans; fallback sans-serif | 400 | 16 px / 1 rem | 1,5 / 24 px | Conteúdo, campos e tabelas |
+| texto-rotulo (derivado) | IBM Plex Sans; fallback sans-serif | 600 | 16 px / 1 rem | 1,5 / 24 px | Rótulos de formulário |
+| texto-botao (derivado) | IBM Plex Sans; fallback sans-serif | 600 | 16 px / 1 rem | 1,5 / 24 px | Ações |
+| texto-ajuda (derivado) | IBM Plex Sans; fallback sans-serif | 400 | 14 px / 0,875 rem | 1,5 / 21 px | Ajuda e metadados |
+| texto-valor (derivado) | IBM Plex Sans; fallback sans-serif | 700 | 24 px / 1,5 rem | 1,25 / 30 px | Totais e indicadores financeiros |
 
 ### Espaçamento
 

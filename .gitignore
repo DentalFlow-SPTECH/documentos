@@ -8,3 +8,7 @@
 *.tmp
 *.bak
 *.swp
+
+# Configuração pessoal do vault e lixeira do Obsidian
+.obsidian/
+.trash/
