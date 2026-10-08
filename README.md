@@ -104,6 +104,10 @@ Pastas sem artefatos têm `.gitkeep` para que a estrutura seja preservada pelo G
 - [Decisão da stack do frontend](0_Context/a_governance/dental_flow_ap_clinic_SPC_frontend_stack_decision.md)
 - [Arquitetura do frontend](1_SPC/b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md)
 - [Plano e evidências da refatoração](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md)
+- [Atualização visual — versão A](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_visual_update.md)
+- [Busca de cadastros e padrão visual](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md)
+- [Prévia de odontograma, procedimentos e Painel com dados](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_odontogram_procedures.md)
+- [Referência visual aprovada](1_SPC/c_design/dental_flow_ap_clinic_SPC_frontend_visual_reference.png)
 - [Critérios de validação](1_SPC/d_quality/dental_flow_ap_clinic_SPC_frontend_refactor_validation.md)
 - [Execução e verificação local](1_SPC/e_operation/dental_flow_ap_clinic_SPC_frontend_execution.md)
 
@@ -122,3 +126,7 @@ Leia apenas as fontes pertinentes à tarefa. A economia de contexto depende dess
 - Crie um novo artefato apenas quando ele representar um documento diferente, com papel ou assunto próprio.
 - Mantenha cada documento na fase e no assunto que melhor descrevem sua responsabilidade.
 - Registre no próprio artefato toda informação assumida, pendente ou derivada.
+
+## Paginação e propostas preservadas
+
+[Paginação das listagens](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md) registra a escolha de todas as listagens, limites, totais e validação em desktop/celular. As propostas de odontograma e procedimentos permanecem para escolha, preservadas com os geradores portáveis em `1_SPC/c_design/dental_flow_ap_clinic_SPC_frontend_preview/`. A [prévia](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_odontogram_procedures.md) descreve sua reprodução.

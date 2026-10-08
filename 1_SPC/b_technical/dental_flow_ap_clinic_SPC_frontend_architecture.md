@@ -37,6 +37,8 @@ A separação foi aplicada aos módulos existentes: Pacientes, Doutores, Estoque
 
 No odontograma e nos gráficos, estado visual e geometria permanecem na apresentação. Valores de itens, escolha de procedimento, filtros, intervalos e agregações da rotina ficam nos Models/ViewModels. Foco e confirmação são aplicados pela View a partir dos comandos e resultados do ViewModel.
 
+A atualização visual da Agenda usa `model/calendar_model.js` para recortar intervalos por dia, distribuir sobreposições em colunas e gerar semanas completas do mês. Essas projeções puras conservam a identidade dos registros e não persistem dados. O ViewModel aplica período/filtro e prepara segmentos, contagens e contexto de navegação. A View transforma minutos em posições/dimensões CSS e controla a rolagem inicial e o foco. A escala de 24 horas não representa uma regra de expediente. [Decisão e evidências da versão A](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_visual_update.md).
+
 ESLint proíbe React/DOM/persistência nos Models, DOM/CSS/Views nos ViewModels, React/Views/ViewModels nos Repositories e acesso direto a provider/Repository/armazenamento nas Views. Reset, fonte e tokens continuam globais; estilos dos componentes e telas usam CSS Modules.
 
 ## Garantias dos dados
@@ -52,10 +54,16 @@ ESLint proíbe React/DOM/persistência nos Models, DOM/CSS/Views nos ViewModels,
 
 ## Interface e acesso
 
-Manter hash routes, filtros na URL, `/painel` e o alias `/dashboard`, incluindo busca/data. CSS Modules preserva os estilos existentes. Os efeitos de foco e diálogos pertencem à apresentação.
+Manter hash routes, filtros na URL, `/painel` e o alias `/dashboard`, incluindo busca/data. CSS Modules organiza os estilos dos componentes e telas; a versão A atualiza seus tokens e superfícies. Os efeitos de foco e diálogos pertencem à apresentação.
 
 Login/Cadastro continuam demonstrativos. Senhas permanecem apenas no estado transitório do formulário e não são persistidas ou registradas em logs. A separação arquitetural não implementa autorização real.
+
+Seleção de cadastros usa o componente compartilhado `component/record_picker.jsx`, funções puras em `record_search.js` e estado/comandos em `use_record_picker.js`. Os módulos fornecem coleções e `onChange` pelos ViewModels. O componente não lê dados do provider/Repository nem grava snapshots; mostra até oito resultados por página da consulta em memória. O dialog e foco pertencem à apresentação, em portal fora do formulário externo. [Escopo/evidências da busca](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
 
 ## Verificação
 
 [Estratégia e critérios de aceite](../d_quality/dental_flow_ap_clinic_SPC_frontend_refactor_validation.md). Regras de domínio devem poder ser testadas sem navegador. Comportamentos de ViewModel e View são verificados pelos fluxos Playwright existentes e pelas regressões específicas acrescentadas quando houver risco.
+
+## Paginação de todas as listagens
+
+O hook compartilhado de paginação mantém estado/contexto; o componente de apresentação recorta somente os registros visíveis. Filtros, regras, totais, snapshot e gravações continuam nas camadas existentes. Não há API ou migração de dados. [Escopo e evidência](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md).

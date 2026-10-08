@@ -4,6 +4,8 @@ module: patient
 ---
 # Pacientes
 
+Continuação de 08/10/2026: listagens paginadas, preservando totais e registros completos. [Limites, contexto e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). A grade temporal e os gráficos conservam seus períodos; propostas visuais de odontograma/procedimentos continuam separadas da implementação.
+
 ## Regras confirmadas
 
 Somente nome completo é obrigatório no protótipo. Outros campos são opcionais; não inventar unicidade, máscaras ou validações de CPF/contatos. Edição conserva ID/código e vínculos com orçamentos. Salvar sem mudanças não gera histórico ou auditoria. Erro conserva preenchimento; navegação com mudanças permite continuar ou descartar.

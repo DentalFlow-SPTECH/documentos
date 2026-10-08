@@ -1,0 +1,24 @@
+{
+  "referenceDate": "2026-10-08",
+  "patients": 120,
+  "doctors": 6,
+  "procedures": 24,
+  "budgets": 64,
+  "appointments": 70,
+  "dayAppointments": 18,
+  "weeklyCounts": [
+    8,
+    11,
+    14,
+    18,
+    12,
+    5,
+    2
+  ],
+  "products": 18,
+  "lowProducts": 6,
+  "cashMovements": 72,
+  "entries": 1256000,
+  "exits": 428000,
+  "saldo": 828000
+}

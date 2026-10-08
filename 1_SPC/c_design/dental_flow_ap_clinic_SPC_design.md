@@ -1,5 +1,11 @@
 # Dental Flow
 
+> Propostas posteriores de 08/10/2026: arcada/mapa compacto para odontograma e cadastro inicial de procedimentos preparados para validação em prévia separada. Ainda não integrados ou aprovados como regra clínica. O Painel atual foi demonstrado com cenário fictício em outra origem. [Prévia e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_odontogram_procedures.md).
+
+> Ajuste de 08/10/2026: após solicitar um padrão visual entre telas, o usuário pediu substituir os dropdowns de pacientes/doutores. A interface usa busca em diálogo com resultados identificados, até oito por página, escolha explícita e retorno de foco. Resumos, cartões móveis, tabelas, carregamento e cores de consultas foram alinhados à versão A. [Decisão, escopo e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md). As regras clínicas e contratos pendentes abaixo conservam seu status.
+
+> Atualização visual de 07/10/2026: o usuário escolheu a versão A após validar alternativas em imagens. A interface atual aplica barra lateral escura, superfícies claras arredondadas, primeiro indicador do Painel escuro e calendários semanal/mensal com cores e textos por situação. A [referência visual aprovada](dental_flow_ap_clinic_SPC_frontend_visual_reference.png) e o [plano com evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_visual_update.md) registram esse recorte. A Agenda mostra uma escala fixa de 24 horas; não define expediente ou disponibilidade clínica. A marca original e IBM Plex Sans continuam aplicadas. As propostas e regras pendentes abaixo conservam seu status original.
+
 > Atualização técnica de 06/10/2026: o usuário confirmou React + Vite + JavaScript/JSX + CSS Modules + MVVM. A migração está registrada no [plano de execução](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md) e na [arquitetura](../b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md). Isso não altera o status de aprovação dos requisitos clínicos ou dos exemplos abaixo. A interface existente usa IBM Plex Sans; as referências originais a Inter são mantidas como origem da proposta, não como fonte aplicada no frontend atual.
 
 ## 1. Visão Geral
@@ -1067,3 +1073,7 @@ As abas Instruções e Prompt p IA descrevem o uso do modelo; suas orientações
 - [Planilha / conteúdo de Home] promessa “Sua consulta marcada em 2 minutos.” não possui requisito ou evidência no v1 → texto preservado como exemplo, sem aplicação ao produto.
 - [Planilha / wireframes] há nome de arquivo de exemplo, mas não há a imagem correspondente → nenhuma disposição visual foi atribuída a esse arquivo.
 
+
+## Paginação de todas as listagens
+
+Listagens usam faixa/total e navegação Anterior/Próxima no mesmo padrão visual. Listas gerais e históricas: dez registros; cartões do Painel: seis/quatro/cinco; seletores de cadastros: oito. Totais descrevem o conjunto completo. [Escopo e evidência](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md).

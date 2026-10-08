@@ -1,0 +1,18 @@
+[
+  {
+    "project": "desktop",
+    "axe": "zero violações nas propostas e no Painel",
+    "overflow": "ausente em 375/320 e desktop",
+    "consoleErrors": [],
+    "links": "Agenda, Caixa, Orçamento e reload verificados",
+    "snapshot": "preservado na navegação"
+  },
+  {
+    "project": "mobile",
+    "axe": "zero violações nas propostas e no Painel",
+    "overflow": "ausente em 375/320 e desktop",
+    "consoleErrors": [],
+    "links": "Agenda, Caixa, Orçamento e reload verificados",
+    "snapshot": "preservado na navegação"
+  }
+]

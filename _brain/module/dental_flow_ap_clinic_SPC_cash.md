@@ -4,6 +4,10 @@ module: cash
 ---
 # Caixa
 
+Continuação de 08/10/2026: listagens paginadas, preservando totais e registros completos. [Limites, contexto e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). A grade temporal e os gráficos conservam seus períodos; propostas visuais de odontograma/procedimentos continuam separadas da implementação.
+
+Acabamento de 08/10/2026: os cartões de totais mantêm o fundo da página entre eles, seguindo as superfícies da versão A. [Entrega/evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
+
 Movimentações manuais exigem valor positivo em centavos, data válida e descrição. O saldo é entradas menos saídas dos registros filtrados; não é saldo bancário nem pressupõe saldo inicial. Orçamento, consulta e estoque não geram movimentação automaticamente.
 
 Código no `frontend`: `src/feature/cash/{model,repository,view_model,view}`. [View](../../../frontend/src/feature/cash/view/cash_view.jsx) e [ViewModel](../../../frontend/src/feature/cash/view_model/use_cash_view_model.js) separados; Model/Repository usam a sessão transacional compartilhada. Verificações estruturais, unitárias e builds aprovados; resultado integrado no plano.

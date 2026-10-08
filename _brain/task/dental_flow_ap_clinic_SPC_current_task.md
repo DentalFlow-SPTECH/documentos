@@ -1,13 +1,13 @@
 ---
 kind: task
-status: complete
+status: implemented_and_validated
 ---
 # Tarefa atual
 
-Executar a migração autorizada para JavaScript/JSX, CSS Modules e MVVM, com atualização documental e brain no Obsidian.
+Solicitação atual concluída na implementação: paginação em todas as listagens, com commit e push autorizados pelo usuário. [Entrega](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). Limite de dez nas listas principais, relações, históricos, auditoria, consultas do dia e itens do orçamento; Painel mantém seis/quatro/cinco e seletores mantêm oito. Totais completos, filtro/contexto, snapshot e validação em outra página preservados.
 
-Referência inicial: frontend `bb3bcc7`, documentos `bfe1970`, sem mudanças locais na abertura. Código/configurações/testes convertidos para JS/JSX; camadas separadas nos módulos existentes; store/fachada antiga removidos. Commit e push dos dois repositórios autorizados pelo usuário em 06/10/2026. Frontend enviado para `origin/main` no commit `6ed7571`, com SHA remoto conferido. Esta nota integra a entrega documental em seu próprio repositório; consultar seu histórico Git. Workflow de publicação da aplicação não executado.
+Check aprovado (lint, 11 unitários e build normal); lint/builds normal/Pages aprovados no estado final. Rodada integral com 258 aprovados, dois skips e quatro falhas de seletor de teste; rodada final de paginação e casos corrigidos com 24 aprovados. Total distinto: 262 verificações aprovadas e dois skips, sem falhas pendentes. Relatório/limites na entrega. Frontend em `main`, commit `8b40f7c`, push confirmado e árvore limpa. Documentação integra esta entrega no commit que contém a ficha; conferir o Git para o estado remoto. Workflow de Pages não acionado.
 
-Lint, sete testes unitários, build normal e build para Pages aprovados. Piloto: 32 testes; primeira integração: 230 aprovados e dois skips. Rodada final após a separação de todos os módulos: 230 testes aprovados, dois skips, zero falhas, no build `/frontend/`, em 6,4 minutos. A refatoração do frontend existente e o brain estão concluídos nesta entrega local. Documentos, quatro células técnicas do briefing e fichas do brain atualizados. [Plano canônico](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md).
+Versão A e busca de cadastros desta continuação estão implementadas. Propostas de odontograma (arcada/mapa compacto) e cadastro de procedimentos permanecem aguardando escolha; não foram integradas. [Prévia e reprodução](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_odontogram_procedures.md). Geradores e artefatos preservados no repositório de documentos e verificados na origem isolada 4189. Snapshot de 4178 conservado.
 
-Para retomar: continuar no workspace Dental Flow, ler os AGENTS dos repositórios afetados, este plano e somente a ficha do módulo necessário. Confirmar branch/HEAD/status e sincronização com `origin/main` antes de editar. O frontend usa React + Vite + JS/JSX, CSS Modules e MVVM; dados locais e fluxos demonstrativos foram preservados. A revisão pode partir dos commits desta entrega. Integração de backend, novas alterações, futuros commits/push e publicação da aplicação mantêm seu próprio escopo e autorização.
+Preservar MVVM, CSS Modules, marca/IBM Plex Sans, snapshot versão 1 e relações. Ler os AGENTS, conferir Git e abrir somente as fontes pertinentes antes de retomar. Publicação e integração das propostas mantêm escopo próprio.
