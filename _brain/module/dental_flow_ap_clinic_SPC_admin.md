@@ -4,16 +4,18 @@ module: admin
 ---
 # Administração
 
-Continuação de 08/10/2026: listagens paginadas, preservando totais e registros completos. [Limites, contexto e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). A grade temporal e os gráficos conservam seus períodos; propostas visuais de odontograma/procedimentos continuam separadas da implementação.
+Estado em 08/10/2026, após a [entrega de listas compactas, clínicas, finalização e relatórios](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md).
 
-Acabamento de 08/10/2026: registros de usuários recebem cartões com bordas e espaçamento da versão A. [Entrega/evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
+A tela tem as abas Usuários, Clínicas (`aba=clinicas`) e Auditoria (`aba=auditoria`). Usuários em lista compacta, seis por página.
 
-Cadastro de usuários e permissões é local/demonstrativo. Perfil não atribui permissões automaticamente. Bloquear/reativar conserva ID e registra histórico. Salvar sem mudança efetiva não gera auditoria. Responsável local é “Você”, sem identidade autenticada de servidor.
+**Clínicas:** cadastro e edição com nome obrigatório; salvar sem mudança não gera evento. **Vincular registros sem clínica** (`administracao/vinculos`) lista consultas e movimentações de caixa ainda sem clínica, oito por página, e vincula somente os registros selecionados à clínica escolhida. Nenhuma clínica é atribuída automaticamente; um registro já vinculado não é alcançado por essa tela.
 
-Código no `frontend`: `src/feature/admin/{model,repository,view_model,view}`. [View](../../../frontend/src/feature/admin/view/admin_view.jsx) e [ViewModel](../../../frontend/src/feature/admin/view_model/use_admin_view_model.js) separados; Model/Repository usam a sessão transacional compartilhada. Verificações estruturais, unitárias e builds aprovados; resultado integrado no plano. Auditoria é persistida pela sessão junto ao registro.
+**Usuários:** cadastro e permissões são locais/demonstrativos. Perfil não atribui permissões automaticamente. Bloquear/reativar conserva ID e registra histórico. Salvar sem mudança efetiva não gera auditoria. Responsável local é “Você”, sem identidade autenticada de servidor. As visões de doutor e dona dos relatórios não usam essas permissões.
 
-Regressões: `test/e2e/doctor_admin.spec.js`, `usability.spec.js`. Cadastro demonstrativo de acesso não deve criar usuários ou privilégios aqui.
+Código no `frontend`: `src/feature/admin/{model,repository,view_model,view}`. [View](../../../frontend/src/feature/admin/view/admin_view.jsx) e [ViewModel](../../../frontend/src/feature/admin/view_model/use_admin_view_model.js). `saveClinicModel` e `linkClinicModel` ficam em `admin_model.js`. Auditoria é persistida pela sessão junto ao registro.
 
-[Plano/evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md) · [Arquitetura](../../1_SPC/b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md)
+Testes: `test/e2e/{doctor_admin,clinic_flow,pagination,usability}.spec.js` e `test/unit/clinic_flow.test.js`. Cadastro demonstrativo de acesso não deve criar usuários ou privilégios aqui.
 
-Matriz efetiva, segurança de auditoria e autorização real permanecem dependentes do backend.
+[Arquitetura](../../1_SPC/b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md) · [Plano/evidências da migração](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md)
+
+Matriz efetiva, segurança de auditoria, autorização real e exclusão/inativação de clínica permanecem dependentes de definição e do backend.

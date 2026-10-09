@@ -1,0 +1,30 @@
+{
+  "referenceDate": "2026-10-08",
+  "clinics": 3,
+  "procedures": 124,
+  "appointments": 99,
+  "withoutClinic": 12,
+  "october": {
+    "registered": 99,
+    "cancelled": 13,
+    "missed": 19,
+    "finalized": 32,
+    "patients": 28,
+    "unfinished": 4
+  },
+  "legacyConcluded": 3,
+  "dailyReports": {
+    "Rascunho": 2,
+    "Enviado": 1,
+    "Em correção": 2,
+    "Validado": 12
+  },
+  "performed": 40,
+  "plan": 18,
+  "presentedCents": 439000,
+  "unknownCount": 6,
+  "waitingCount": 2,
+  "glosaCents": 103200,
+  "glosaPartial": 2,
+  "glosaTotal": 2
+}

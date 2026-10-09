@@ -33,7 +33,7 @@ Repository recebe a sessão por injeção. Model retorna a mudança; a sessão g
 
 Cada módulo migrado usa `feature/<module>/{model,repository,view_model,view}`. Compartilhados ficam em `component`, `app`, `data/local` e `style`. Dados fictícios e controles de simulação continuam identificados como demonstração.
 
-A separação foi aplicada aos módulos existentes: Pacientes, Doutores, Estoque, Orçamentos/odontograma, Agenda, Caixa, Administração, Acesso, Painel e Revisão. A fachada `useDemo` e o store original foram removidos. Sete módulos com operações persistidas possuem Repository; Acesso usa simulação transitória, Painel agrega dados existentes e Revisão controla a sessão, sem Repositories vazios.
+A separação foi aplicada aos módulos existentes: Pacientes, Doutores, Estoque, Orçamentos/odontograma, Agenda, Caixa, Administração, Acesso, Painel e Revisão. A fachada `useDemo` e o store original foram removidos. Sete módulos com operações persistidas possuem Repository; Acesso usa simulação transitória, Painel agrega dados existentes e Revisão controla a sessão, sem Repositories vazios. Relatórios, acrescentado depois, é o oitavo módulo com Repository.
 
 No odontograma e nos gráficos, estado visual e geometria permanecem na apresentação. Valores de itens, escolha de procedimento, filtros, intervalos e agregações da rotina ficam nos Models/ViewModels. Foco e confirmação são aplicados pela View a partir dos comandos e resultados do ViewModel.
 
@@ -58,7 +58,7 @@ Manter hash routes, filtros na URL, `/painel` e o alias `/dashboard`, incluindo 
 
 Login/Cadastro continuam demonstrativos. Senhas permanecem apenas no estado transitório do formulário e não são persistidas ou registradas em logs. A separação arquitetural não implementa autorização real.
 
-Seleção de cadastros usa o componente compartilhado `component/record_picker.jsx`, funções puras em `record_search.js` e estado/comandos em `use_record_picker.js`. Os módulos fornecem coleções e `onChange` pelos ViewModels. O componente não lê dados do provider/Repository nem grava snapshots; mostra até oito resultados por página da consulta em memória. O dialog e foco pertencem à apresentação, em portal fora do formulário externo. [Escopo/evidências da busca](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
+Seleção de cadastros usa o componente compartilhado `component/record_picker.jsx`, funções puras em `record_search.js` e estado/comandos em `use_record_picker.js`. Os módulos fornecem coleções e `onChange` pelos ViewModels. O componente não lê dados do provider/Repository nem grava snapshots; mostra até seis resultados por página da consulta em memória e atende também ao catálogo de procedimentos. O dialog e foco pertencem à apresentação, em portal fora do formulário externo. [Escopo/evidências da busca](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
 
 ## Verificação
 
@@ -67,3 +67,23 @@ Seleção de cadastros usa o componente compartilhado `component/record_picker.j
 ## Paginação de todas as listagens
 
 O hook compartilhado de paginação mantém estado/contexto; o componente de apresentação recorta somente os registros visíveis. Filtros, regras, totais, snapshot e gravações continuam nas camadas existentes. Não há API ou migração de dados. [Escopo e evidência](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md).
+
+## Clínicas, finalização de consulta e relatórios
+
+[Decisões, escopo e evidência](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md). O formato persistido cresce apenas com campos e coleções opcionais; a chave e a versão 1 permanecem.
+
+| Dado | Onde fica | Observação |
+| --- | --- | --- |
+| `clinics` | coleção do snapshot | Lida como lista vazia quando ausente. Nome e histórico. |
+| `dailyReports` | coleção do snapshot | Data, doutor, clínica, estado, observação, consultas incluídas no envio, motivo da devolução e histórico. |
+| `clinicId`, `procedureId`, `insurance` | consulta | Opcionais. O nome do procedimento continua copiado em `procedure`. |
+| `completion` | consulta | Data/hora da finalização, forma de atendimento, convênio, observação, guia pendente e itens realizados. |
+| `claim`, `history` | item realizado | Conferência do convênio; valor desconhecido é `null`. |
+| `clinicId` | movimentação de caixa | Opcional. |
+
+- `src/demo/clinic.js` reúne funções puras usadas por mais de um módulo: filtro de clínica com a opção “sem clínica”, intervalo da consulta, possibilidade de finalizar, relatório que fixa uma consulta e leitura dos itens realizados. Assim a regra não é copiada em Agenda, Caixa, Painel e Relatórios.
+- Finalizar é uma operação do Model da Agenda executada pelo Repository dentro da transação: situação, itens, histórico e auditoria são gravados juntos. A operação é idempotente e não toca em `cashMovements`.
+- `src/feature/report` segue `model`/`repository`/`view_model`/`view`. `report_model.js` calcula relatórios esperados, totais mensais e CSV sem React, DOM ou armazenamento. O Painel reutiliza essas funções em vez de recalcular.
+- A grade semanal usa duas projeções puras de `calendar_model.js`: blocos por horário de início (todos os doutores) e grupos de sobreposição (doutor filtrado). A View só converte minutos em posição e controla rolagem e foco.
+- O padrão compacto de listagem é CSS compartilhado em `component/ui.module.css`; `PagedList` recebe o tamanho da página de cada tela. A paginação continua local, sobre os dados em memória.
+- As visões de doutor e dona são rotas da mesma aplicação. Não há verificação de perfil: autorização depende do backend.

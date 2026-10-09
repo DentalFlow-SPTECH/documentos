@@ -4,7 +4,7 @@ module: patient
 ---
 # Pacientes
 
-Continuação de 08/10/2026: listagens paginadas, preservando totais e registros completos. [Limites, contexto e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). A grade temporal e os gráficos conservam seus períodos; propostas visuais de odontograma/procedimentos continuam separadas da implementação.
+Estado em 08/10/2026, após a [entrega de listas compactas, clínicas, finalização e relatórios](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md): lista compacta com oito pacientes por página e orçamentos do paciente em páginas de seis. O formulário tem quatro seções navegáveis (Dados pessoais, Contato, Endereço, Informações adicionais), um seletor de seção no celular (`#patient_section`) e barra de ações fixa; um erro abre a seção do campo e leva o foco a ele. O paciente é único entre clínicas e conta uma vez nos totais. Convênio e carteirinha do cadastro são apenas sugeridos no agendamento e na finalização.
 
 ## Regras confirmadas
 

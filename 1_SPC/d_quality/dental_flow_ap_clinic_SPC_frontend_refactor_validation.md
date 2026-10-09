@@ -39,3 +39,15 @@ Resultado final em 07/10/2026: `npm run check` aprovado (lint, 11 testes unitár
 ## Paginação de todas as listagens
 
 A regressão de paginação cobre conjuntos de 24 registros, última página, filtros, detalhe/retorno, reload, snapshot, totais integrais, histórico/auditoria e erro de formulário em outra página. A integração usa a prévia Pages no Edge em desktop/celular. [Escopo e evidência](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md).
+
+## Listas compactas, clínicas, finalização e relatórios
+
+A [entrega](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md) traz a tabela de comportamentos e o teste que prova cada um. Critérios acrescentados:
+
+- Regras novas verificadas sem navegador em `test/unit/clinic_flow.test.js`: compatibilidade do snapshot, clínica e conflito entre clínicas, finalização idempotente sem Caixa, relatório diário, totais por clínica, glosa e valor desconhecido, agrupamento da agenda e busca no catálogo.
+- Fluxos completos em `test/e2e/clinic_flow.spec.js`, em desktop e 375 px, com recarregamento e comparação do snapshot.
+- Listas principais com busca e paginação visíveis sem rolar a página em 1366 × 768 (`pagination.spec.js`); semana da Agenda e visão geral do Painel na primeira tela em 1366 × 768 e 1440 × 900 (`visual_a.spec.js`, `dashboard.spec.js`).
+- As telas novas entram na varredura de axe, 320 px, 720 px, textos longos, erros de JavaScript e snapshot inalterado (`usability.spec.js`). A varredura emula movimento reduzido para que o axe leia o estado final dos botões, e não uma cor intermediária da transição.
+- A validação visual usa origem isolada (4190) com cenário fictício gerado pelos Models da aplicação; nenhum armazenamento existente é lido ou alterado.
+
+Resultado em 08/10/2026: lint aprovado, 20 testes unitários aprovados, builds normal e Pages aprovados. E2E no servidor de desenvolvimento: 275 aprovados, 3 skips previstos e nenhuma falha (13,8 min). E2E na prévia `/frontend/`: 275 aprovados, 3 skips previstos e nenhuma falha (10,5 min).

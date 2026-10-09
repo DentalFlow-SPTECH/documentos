@@ -4,7 +4,7 @@ module: doctor
 ---
 # Doutores
 
-Continuação de 08/10/2026: listagens paginadas, preservando totais e registros completos. [Limites, contexto e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). A grade temporal e os gráficos conservam seus períodos; propostas visuais de odontograma/procedimentos continuam separadas da implementação.
+Estado em 08/10/2026, após a [entrega de listas compactas, clínicas, finalização e relatórios](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md): lista compacta com oito doutores por página; consultas e orçamentos vinculados em páginas de seis. O doutor pode atender em qualquer clínica cadastrada, sem vínculo fixo, e o conflito de horário vale entre clínicas. Relatório diário e produção por doutor ficam em [Relatórios](dental_flow_ap_clinic_SPC_report.md).
 
 Continuação de 08/10/2026: situações de consultas vinculadas usam as mesmas cores/textos da Agenda e Painel. A seleção de doutor nos formulários e filtro da Agenda usa a busca compartilhada por nome/CRO/especialidade, com identificadores e escolha por ID. [Entrega e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
 

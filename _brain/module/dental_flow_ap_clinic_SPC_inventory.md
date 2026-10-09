@@ -4,7 +4,7 @@ module: inventory
 ---
 # Estoque
 
-Continuação de 08/10/2026: listagens paginadas, preservando totais e registros completos. [Limites, contexto e evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md). A grade temporal e os gráficos conservam seus períodos; propostas visuais de odontograma/procedimentos continuam separadas da implementação.
+Estado em 08/10/2026, após a [entrega de listas compactas, clínicas, finalização e relatórios](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md): lista compacta com oito materiais por página e movimentos do material em páginas de seis. O Estoque não foi dividido por clínica. O Painel mostra somente a quantidade de materiais abaixo do mínimo, com atalho para o filtro.
 
 Acabamento de 08/10/2026: resumo de saldo e cartões móveis de material seguem as bordas, raios e espaçamentos da versão A. [Entrega/evidências](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md).
 

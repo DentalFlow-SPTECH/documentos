@@ -1,0 +1,189 @@
+{
+  "base": "http://127.0.0.1:4190/frontend/",
+  "viewport": {
+    "width": 1366,
+    "height": 768
+  },
+  "measurements": [
+    {
+      "screen": "agenda_week",
+      "route": "/agenda?date=2026-10-08",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "agenda_slot",
+      "route": "/agenda?date=2026-10-08&view=week&faixa=480-540",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "agenda_doctor",
+      "route": "/agenda?date=2026-10-08&doutor=d1",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "agenda_month",
+      "route": "/agenda?date=2026-10-08&view=month",
+      "pageHeight": 1003,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": false,
+      "errors": []
+    },
+    {
+      "screen": "dashboard_overview",
+      "route": "/painel?date=2026-10-08",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "dashboard_production",
+      "route": "/painel?date=2026-10-08&aba=producao",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "dashboard_finance",
+      "route": "/painel?date=2026-10-08&aba=financeiro",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "patient_list",
+      "route": "/pacientes",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "patient_form",
+      "route": "/pacientes/novo",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "doctor_list",
+      "route": "/doutores",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "inventory_list",
+      "route": "/estoque",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "cash",
+      "route": "/caixa?de=2026-10-01&ate=2026-10-31",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "admin",
+      "route": "/administracao",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "clinic_link",
+      "route": "/administracao/vinculos",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "appointment_form",
+      "route": "/agenda/nova?date=2026-10-09",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "finalization",
+      "route": "/agenda/teste-a-3-3/finalizar",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "appointment_finalized",
+      "route": "/agenda/teste-a-0-0",
+      "pageHeight": 1205,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": false,
+      "errors": []
+    },
+    {
+      "screen": "daily_report",
+      "route": "/relatorios/diario?data=2026-10-06&doutor=d1",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "report_review",
+      "route": "/relatorios/conferencia",
+      "pageHeight": 768,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": true,
+      "errors": []
+    },
+    {
+      "screen": "monthly_report",
+      "route": "/relatorios/mensal?mes=2026-10&atendimento=Conv%C3%AAnio",
+      "pageHeight": 796,
+      "viewportHeight": 768,
+      "withoutHorizontalScroll": true,
+      "fitsFirstScreen": false,
+      "errors": []
+    }
+  ]
+}

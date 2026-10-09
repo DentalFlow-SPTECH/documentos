@@ -42,3 +42,9 @@ Para retomar a manutenção, consulte o [brain](../../_brain/dental_flow_ap_clin
 ## Paginação de todas as listagens
 
 Antes da entrega, executar check, build:pages e E2E com TEST_BASE_URL apontando para /frontend/. Commit e push foram autorizados para esta continuação; o workflow manual de Pages mantém publicação como ação separada. [Escopo e evidência](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_pagination.md).
+
+## Clínicas, finalização e relatórios
+
+Para experimentar os fluxos novos com dados fictícios sem tocar no armazenamento das origens de desenvolvimento ou de prévia, use a origem isolada 4190 descrita na [entrega](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md): build para Pages no `frontend`, depois o gerador e o servidor em `1_SPC/c_design/dental_flow_ap_clinic_SPC_frontend_clinic_reports/`. O servidor só grava o cenário quando a chave ainda não existe nessa origem. Rotas novas: `#/agenda/<id>/finalizar`, `#/relatorios/diario`, `#/relatorios/conferencia`, `#/relatorios/mensal`, `#/administracao?aba=clinicas` e `#/administracao/vinculos`.
+
+`npm run check` passa a executar 20 testes unitários. Antes de uma entrega, repetir lint, unitários, build normal, build para Pages e E2E no servidor de desenvolvimento e na prévia `/frontend/`. Commit, push e publicação continuam dependendo de autorização específica.
