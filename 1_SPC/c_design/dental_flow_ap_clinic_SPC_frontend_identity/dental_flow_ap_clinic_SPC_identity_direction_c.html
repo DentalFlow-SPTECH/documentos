@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Direção C — Sereno</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="dental_flow_ap_clinic_SPC_identity_common.js"></script>
+<style>
+:root {
+  --bg: #F3EEE6; --side: #EBE4D8; --surface: #FFFDF9; --ink: #22302A; --muted: #66716B; --line: #E4DCCF;
+  --primary: #2E5245; --primary-soft: #DDE8E0; --accent: #C4673F; --accent-soft: #F6E3D8; --wa: #2F7A4F;
+  --s-agendado-fg: #85570F; --s-agendado-bg: #F7EBD3; --s-confirmado-fg: #2F6B47; --s-confirmado-bg: #DFEDE3;
+  --s-atendimento-fg: #63468E; --s-atendimento-bg: #ECE4F5; --s-concluido-fg: #3F5F7A; --s-concluido-bg: #E1EAF1;
+  --s-cancelado-fg: #A8432E; --s-cancelado-bg: #F7E1DA; --s-faltou-fg: #6E6A62; --s-faltou-bg: #ECE8E1;
+  --serif: 'Fraunces', Georgia, serif; --font: 'Nunito Sans', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: #D9DCDF; color: var(--ink); padding: 40px; display: flex; flex-direction: column; gap: 56px; align-items: flex-start; -webkit-font-smoothing: antialiased; }
+.board { padding: 4px; }
+.tag { font: 700 15px/1.3 var(--font); color: #3A4448; margin-bottom: 16px; display: flex; gap: 10px; align-items: center; }
+.tag b { background: #22302A; color: #fff; padding: 4px 10px; border-radius: 6px; }
+.frame { background: var(--bg); overflow: hidden; position: relative; }
+.desktop { width: 1440px; height: 900px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,.16); display: flex; }
+.phones .row { display: flex; gap: 40px; padding: 12px; }
+.phone { width: 390px; height: 844px; border-radius: 46px; box-shadow: 0 0 0 10px #14181A, 0 30px 60px rgba(0,0,0,.28); display: flex; flex-direction: column; }
+.statusbar { height: 46px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 6px 30px 0 34px; font-weight: 700; font-size: 15px; }
+.statusbar-icons { display: flex; gap: 6px; } .statusbar-icons svg { width: 16px; height: 16px; }
+svg.lucide { width: 20px; height: 20px; stroke-width: 1.8; flex: none; }
+.mark { width: 42px; height: 42px; border-radius: 14px; background: #01101F url(dental_flow_ap_clinic_SPC_identity_logo.png) no-repeat; background-size: 190%; background-position: 50% 14%; flex: none; }
+.serif { font-family: var(--serif); font-optical-sizing: auto; }
+
+.avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 15px; flex: none; }
+.avatar.xs { width: 26px; height: 26px; font-size: 11px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 12px; border-radius: 999px; font-weight: 700; font-size: 13.5px; white-space: nowrap; }
+.pill svg.lucide { width: 15px; height: 15px; stroke-width: 2.4; }
+.s-agendado { color: var(--s-agendado-fg); background: var(--s-agendado-bg); } .s-confirmado { color: var(--s-confirmado-fg); background: var(--s-confirmado-bg); }
+.s-atendimento { color: var(--s-atendimento-fg); background: var(--s-atendimento-bg); } .s-concluido { color: var(--s-concluido-fg); background: var(--s-concluido-bg); }
+.s-cancelado { color: var(--s-cancelado-fg); background: var(--s-cancelado-bg); } .s-faltou { color: var(--s-faltou-fg); background: var(--s-faltou-bg); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 48px; padding: 0 22px; border-radius: 999px; font: 700 16px var(--font); white-space: nowrap; }
+.btn.primary { background: var(--primary); color: #fff; }
+.btn.soft { background: var(--primary-soft); color: var(--primary); }
+.btn.line { border: 1.5px solid var(--line); background: var(--surface); }
+.btn.wa { background: #E3F1E8; color: var(--wa); }
+.btn.sm { height: 38px; padding: 0 16px; font-size: 14.5px; }
+.btn.lg { height: 56px; font-size: 17px; width: 100%; }
+
+/* Lateral */
+.side { width: 256px; background: var(--side); padding: 26px 18px 22px; display: flex; flex-direction: column; gap: 26px; flex: none; }
+.clinic { display: flex; align-items: center; gap: 12px; padding: 0 6px; }
+.clinic b { display: block; font-family: var(--serif); font-size: 20px; font-weight: 600; } .clinic small { color: var(--muted); font-size: 14px; font-weight: 600; }
+.nav { display: flex; flex-direction: column; gap: 4px; }
+.nav a { display: flex; align-items: center; gap: 14px; height: 50px; padding: 0 16px; border-radius: 16px; font-weight: 700; font-size: 16.5px; color: #4D5852; }
+.nav a.on { background: var(--surface); color: var(--primary); box-shadow: 0 2px 10px rgba(60,50,30,.07); }
+.profile { margin-top: auto; display: flex; align-items: center; gap: 12px; background: var(--surface); padding: 12px; border-radius: 18px; }
+.profile b { display: block; font-size: 15px; } .profile small { color: var(--muted); font-size: 13px; }
+.profile svg.lucide { margin-left: auto; color: var(--muted); }
+.main { flex: 1; padding: 30px 36px 0; display: flex; flex-direction: column; min-width: 0; }
+.hello { display: flex; justify-content: space-between; align-items: flex-start; gap: 24px; margin-bottom: 22px; }
+.hello .date { color: var(--muted); font-weight: 700; font-size: 15px; margin-bottom: 6px; }
+.hello h1 { font-family: var(--serif); font-size: 44px; font-weight: 500; letter-spacing: -1px; line-height: 1.05; }
+.hello .summary { font-size: 18px; color: #3D4A44; margin-top: 10px; max-width: 640px; line-height: 1.5; }
+.hello .summary b { color: var(--ink); font-weight: 800; }
+.hello .actions { display: flex; gap: 10px; align-items: center; }
+.search { width: 260px; height: 48px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); display: flex; align-items: center; gap: 10px; padding: 0 18px; color: var(--muted); font-size: 15.5px; }
+.toolbar { display: flex; align-items: center; gap: 14px; margin-bottom: 18px; }
+.segmented { display: inline-flex; background: var(--side); border-radius: 999px; padding: 4px; }
+.segmented span { height: 42px; padding: 0 20px; border-radius: 999px; display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15.5px; color: var(--muted); }
+.segmented span.on { background: var(--surface); color: var(--ink); box-shadow: 0 2px 8px rgba(60,50,30,.08); }
+.segmented em { font-style: normal; color: var(--muted); font-weight: 600; }
+.chip { white-space: nowrap; height: 42px; padding: 0 16px; border-radius: 999px; border: 1.5px solid var(--line); display: inline-flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; background: transparent; }
+.chip.on { background: var(--ink); color: #fff; border-color: var(--ink); }
+.content { flex: 1; display: grid; grid-template-columns: 1fr 360px; gap: 22px; min-height: 0; }
+.earlier { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-radius: 18px; border: 1.5px dashed #D6CCBC; color: var(--muted); font-weight: 700; font-size: 15px; margin-bottom: 14px; }
+.earlier svg.lucide:last-child { margin-left: auto; }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; align-content: start; overflow: hidden; }
+.appt { background: var(--surface); border-radius: 24px; padding: 18px 20px; display: flex; flex-direction: column; gap: 4px; border: 1px solid var(--line); }
+.appt.next { box-shadow: 0 0 0 2.5px var(--accent); border-color: transparent; }
+.appt-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+.appt-top .time { font-family: var(--serif); font-size: 30px; font-weight: 500; letter-spacing: -.5px; line-height: 1; }
+.appt-top .dur { color: var(--muted); font-weight: 600; font-size: 14px; }
+.appt-top .pill { margin-left: auto; align-self: center; }
+.appt h3 { font-size: 18.5px; font-weight: 800; } .appt p { color: var(--muted); font-size: 15px; }
+.appt-foot { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line); }
+.doc { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 14.5px; color: #4D5852; }
+.flag { color: var(--accent); font-weight: 800; font-size: 13px; letter-spacing: .6px; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+.attn { display: flex; flex-direction: column; gap: 14px; }
+.panel { background: var(--surface); border-radius: 24px; padding: 20px; border: 1px solid var(--line); }
+.panel h3 { font-family: var(--serif); font-size: 21px; font-weight: 500; margin-bottom: 4px; }
+.panel > p { color: var(--muted); font-size: 14.5px; margin-bottom: 12px; }
+.prow { display: grid; grid-template-columns: 40px 1fr auto; gap: 12px; align-items: center; padding: 10px 0; border-top: 1px solid var(--line); }
+.prow .avatar { width: 40px; height: 40px; font-size: 14px; }
+.prow b { display: block; font-size: 15.5px; } .prow small { color: var(--muted); font-size: 13.5px; }
+.round { width: 42px; height: 42px; border-radius: 50%; display: grid; place-items: center; background: #E3F1E8; color: var(--wa); }
+
+/* Painel */
+.story { font-size: 20px; line-height: 1.55; color: #3D4A44; max-width: 760px; margin-top: 10px; }
+.story b { font-family: var(--serif); font-weight: 600; color: var(--ink); font-size: 22px; }
+.trio { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 16px; }
+.soft { border-radius: 24px; padding: 20px 22px; }
+.soft small { font-weight: 700; font-size: 15px; display: flex; align-items: center; gap: 8px; }
+.soft b { display: block; font-family: var(--serif); font-size: 36px; font-weight: 500; letter-spacing: -.8px; margin: 8px 0 2px; font-variant-numeric: lining-nums tabular-nums; }
+.soft span { font-size: 14.5px; color: #4D5852; }
+.duo { display: grid; grid-template-columns: 1fr 380px; gap: 16px; }
+.duo .panel svg { width: 100%; height: auto; }
+.attnbig { background: var(--accent-soft); border-radius: 24px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.attnbig .flag { margin-bottom: 4px; }
+.attnbig b { font-family: var(--serif); font-size: 40px; font-weight: 500; color: #8E3F1F; line-height: 1; }
+.attnbig p { color: #6B3A22; font-size: 15.5px; line-height: 1.45; }
+.attnbig .btn { margin-top: 8px; align-self: flex-start; background: #fff; color: #8E3F1F; }
+.mini { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 22px; }
+.mini div { display: flex; align-items: center; gap: 10px; font-size: 15px; } .mini b { margin-left: auto; font-weight: 800; }
+.mini i { width: 10px; height: 10px; border-radius: 50%; }
+.dents { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px; }
+.dentc { background: var(--surface); border: 1px solid var(--line); border-radius: 22px; padding: 12px 16px; display: flex; gap: 14px; align-items: center; }
+.dentc b { display: block; font-size: 15px; white-space: nowrap; } .dentc small { color: var(--muted); font-size: 14px; }
+.dentc strong { margin-left: auto; font-family: var(--serif); font-weight: 500; font-size: 20px; }
+
+/* Celular */
+.m-hello { padding: 10px 22px 14px; }
+.m-hello small { color: var(--muted); font-weight: 700; font-size: 14.5px; }
+.m-hello h1 { font-family: var(--serif); font-size: 34px; font-weight: 500; letter-spacing: -.8px; line-height: 1.1; margin: 4px 0 8px; }
+.m-hello p { font-size: 16.5px; color: #3D4A44; line-height: 1.45; } .m-hello p b { font-weight: 800; color: var(--ink); }
+.m-seg { padding: 0 16px 14px; } .m-seg .segmented { display: flex; } .m-seg .segmented span { flex: 1; justify-content: center; }
+.m-list { flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+.m-list .appt { padding: 16px 18px; border-radius: 22px; }
+.m-list .appt-top .time { font-size: 26px; }
+.tabbar { height: 86px; flex: none; background: var(--surface); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px 10px 22px; }
+.tabbar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 12.5px; font-weight: 700; color: #7D8781; }
+.tabbar a svg.lucide { width: 24px; height: 24px; }
+.tabbar a.on { color: var(--primary); } .tabbar a.on svg.lucide { stroke-width: 2.4; }
+.fab { position: absolute; right: 18px; bottom: 104px; height: 56px; padding: 0 24px 0 20px; border-radius: 999px; background: var(--primary); color: #fff; display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 16px; box-shadow: 0 10px 24px rgba(46,82,69,.35); }
+.m-search { margin: 0 16px 12px; height: 52px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); display: flex; align-items: center; gap: 10px; padding: 0 18px; color: var(--muted); font-size: 16.5px; }
+.m-chips { display: flex; gap: 8px; padding: 0 16px 14px; }
+.m-chips .chip { height: 38px; font-size: 14.5px; }
+.m-card { margin: 0 16px; background: var(--surface); border-radius: 24px; border: 1px solid var(--line); padding: 4px 16px; flex: 1; overflow: hidden; }
+.m-card .prow { grid-template-columns: 44px 1fr 22px; padding: 12px 0; }
+.m-card .prow:first-child { border-top: 0; }
+.m-card .prow .avatar { width: 44px; height: 44px; }
+.m-card .prow b { font-size: 16.5px; } .m-card .prow small { font-size: 14px; }
+.m-card .prow > svg { color: #A3A9A5; }
+.m-form { flex: 1; overflow: hidden; padding: 0 16px; display: flex; flex-direction: column; gap: 12px; }
+.acc { background: var(--surface); border-radius: 24px; border: 1px solid var(--line); }
+.acc-h { display: flex; align-items: center; gap: 12px; padding: 16px 18px; }
+.acc-h .n { width: 32px; height: 32px; border-radius: 50%; background: var(--primary); color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 15px; }
+.acc.closed .acc-h .n { background: var(--side); color: var(--muted); }
+.acc-h b { display: block; font-size: 17px; font-weight: 800; } .acc-h small { color: var(--muted); font-size: 14px; }
+.acc-h svg.lucide { margin-left: auto; color: var(--muted); }
+.acc-b { padding: 0 18px 18px; display: flex; flex-direction: column; gap: 14px; }
+.field label { display: block; font-weight: 800; font-size: 15px; margin-bottom: 6px; } .field label span { color: var(--muted); font-weight: 600; }
+.input { height: 52px; border-radius: 16px; border: 1.5px solid #DDD3C4; background: #fff; padding: 0 16px; display: flex; align-items: center; font-size: 17px; }
+.input.ph { color: #8C948F; }
+.input.err { border: 2px solid var(--s-cancelado-fg); }
+.input.focus { border: 2px solid var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
+.errmsg { color: var(--s-cancelado-fg); font-size: 14.5px; font-weight: 700; margin-top: 6px; display: flex; gap: 6px; align-items: center; }
+.errmsg svg.lucide { width: 16px; height: 16px; }
+.m-foot { padding: 12px 16px 30px; flex: none; }
+.m-bar { display: flex; align-items: center; gap: 8px; padding: 4px 16px 10px; }
+.m-bar .ib { width: 44px; height: 44px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; }
+.m-bar h1 { font-family: var(--serif); font-size: 26px; font-weight: 500; margin-left: 6px; }
+
+.login .statusbar { position: relative; z-index: 2; }
+.login .blob { position: relative; height: 330px; display: grid; place-items: center; }
+.login .blob::before { content: ''; position: absolute; width: 420px; height: 360px; top: -110px; left: -20px; background: var(--primary-soft); border-radius: 46% 54% 58% 42% / 52% 40% 60% 48%; }
+.login .blob::after { content: ''; position: absolute; width: 170px; height: 170px; right: -40px; top: 150px; background: var(--accent-soft); border-radius: 50%; }
+.login .blob .mark { position: relative; z-index: 1; width: 92px; height: 92px; border-radius: 28px; box-shadow: 0 14px 30px rgba(1,16,31,.25); }
+.login .body { padding: 0 24px; display: flex; flex-direction: column; gap: 16px; flex: 1; }
+.login h1 { font-family: var(--serif); font-size: 34px; font-weight: 500; letter-spacing: -.8px; line-height: 1.1; }
+.login .lead { color: var(--muted); font-size: 16px; margin-top: -6px; }
+.login .help { margin: auto 0 38px; color: var(--muted); font-size: 15px; line-height: 1.45; text-align: center; }
+.pw { justify-content: space-between; letter-spacing: 3px; } .pw svg.lucide { color: var(--muted); }
+</style>
+</head>
+<body>
+<div class="board"><p class="tag"><b>Direção C · Sereno</b> Agenda de hoje (recepção) · protótipo estático HTML · dados fictícios</p><section class="frame desktop" id="c_agenda"></section></div>
+<div class="board"><p class="tag"><b>Direção C · Sereno</b> Painel do mês (dentista responsável) · protótipo estático HTML · dados fictícios</p><section class="frame desktop" id="c_painel"></section></div>
+<div class="board phones"><p class="tag"><b>Direção C · Sereno</b> Celular: entrar, hoje, pacientes e novo paciente · protótipo estático HTML · dados fictícios</p>
+  <div class="row">
+    <section class="frame phone login" id="c_login"></section>
+    <section class="frame phone" id="c_hoje"></section>
+    <section class="frame phone" id="c_pacientes"></section>
+    <section class="frame phone" id="c_novo"></section>
+  </div>
+</div>
+<script>
+const { appointments, status, dentist, initials, pick, patients, dashboard: dash, brl, pct, minutes } = DF;
+const tones = [['#E4ECDF', '#3F5E37'], ['#F3E1D6', '#8E4A2A'], ['#E6E1F0', '#55457E'], ['#DCE8EC', '#2F5A68'], ['#F2E8CF', '#77591A']];
+const avatar = (name, cls = '') => { const [bg, fg] = pick(name, tones); return `<span class="avatar ${cls}" style="background:${bg};color:${fg}">${initials(name)}</span>`; };
+const pill = s => `<span class="pill s-${status[s].key}"><i data-lucide="${status[s].icon}"></i>${status[s].label}</span>`;
+
+function side(active, who) {
+  const items = [['sun', 'Hoje'], ['calendar-days', 'Agenda'], ['users', 'Pacientes'], ...(who.role === 'Dentista' ? [['chart-column', 'Painel']] : []), ['building-2', 'Clínica']];
+  return `<aside class="side"><div class="clinic"><span class="mark"></span><div><b>DentalFlow</b><small>Clínica Centro</small></div></div>
+  <nav class="nav">${items.map(([icon, label]) => `<a class="${label === active ? 'on' : ''}"><i data-lucide="${icon}"></i>${label}</a>`).join('')}</nav>
+  <div class="profile">${avatar(who.name)}<span><b>${who.first}</b><small>${who.role}</small></span><i data-lucide="log-out"></i></div></aside>`;
+}
+
+function card(a, opts = {}) {
+  const d = dentist(a.dentist);
+  const action = a.status === 'AGENDADO' ? `<span class="btn wa sm"><i data-lucide="message-circle"></i>Lembrar</span>`
+    : a.status === 'CONFIRMADO' ? `<span class="btn ${a.next ? 'primary' : 'soft'} sm">Iniciar</span>`
+    : a.status === 'EM_ATENDIMENTO' ? `<span class="btn soft sm">Concluir</span>` : '';
+  return `<article class="appt ${a.next ? 'next' : ''}">${a.next ? `<span class="flag"><i data-lucide="bell-ring" style="width:15px;height:15px"></i>Próxima · em 20 min</span>` : ''}
+    <div class="appt-top"><span class="time">${a.time}</span><span class="dur">${a.min} min</span>${pill(a.status)}</div>
+    <h3>${a.patient}</h3><p>${a.procedure}</p>
+    <div class="appt-foot"><span class="doc">${avatar(d.name, 'xs')}${d.short}</span>${action}</div></article>`;
+}
+
+const pending = appointments.filter(a => a.status === 'AGENDADO');
+const active = appointments.filter(a => a.status === 'EM_ATENDIMENTO');
+document.getElementById('c_agenda').innerHTML = side('Hoje', { name: 'Carla Souza', first: 'Carla', role: 'Recepção' }) + `
+<div class="main">
+  <header class="hello"><div><p class="date">Quarta-feira, 28 de outubro</p><h1>Bom dia, Carla.</h1>
+    <p class="summary">Hoje a clínica tem <b>14 consultas</b>. <b>${pending.length} pacientes</b> ainda não confirmaram e <b>${active.length}</b> estão em atendimento agora.</p></div>
+    <div class="actions"><label class="search"><i data-lucide="search"></i>Buscar paciente</label><span class="btn primary"><i data-lucide="plus"></i>Agendar consulta</span></div></header>
+  <div class="toolbar"><div class="segmented"><span class="on"><i data-lucide="sunrise"></i>Manhã <em>10</em></span><span><i data-lucide="sunset"></i>Tarde <em>4</em></span></div>
+    <span class="chip on">Todos</span>${DF.dentists.map(d => `<span class="chip">${d.short}</span>`).join('')}</div>
+  <div class="content">
+    <div style="min-height:0;overflow:hidden">
+      <div class="earlier"><i data-lucide="history"></i>3 consultas mais cedo · 2 concluídas e 1 falta<i data-lucide="chevron-down"></i></div>
+      <div class="cards">${appointments.filter(a => ['EM_ATENDIMENTO', 'CONFIRMADO', 'AGENDADO'].includes(a.status) && minutes(a.time) < 720).map(a => card(a)).join('')}</div>
+    </div>
+    <div class="attn">
+      <div class="panel"><h3>Ainda não confirmaram</h3><p>Um lembrete pelo WhatsApp costuma resolver.</p>
+        ${pending.map(a => `<div class="prow">${avatar(a.patient)}<span><b>${a.patient}</b><small>Hoje, ${a.time} · ${a.procedure}</small></span><span class="round"><i data-lucide="message-circle"></i></span></div>`).join('')}</div>
+      <div class="panel"><h3>Na cadeira agora</h3>
+        ${active.map(a => `<div class="prow">${avatar(a.patient)}<span><b>${a.patient}</b><small>Desde ${a.time} · ${dentist(a.dentist).short}</small></span><span class="pill s-atendimento">${a.min} min</span></div>`).join('')}</div>
+    </div>
+  </div>
+</div>`;
+
+function area({ width, height, data, stroke, fill, grid, label }) {
+  const pad = { top: 16, right: 24, bottom: 26, left: 46 };
+  const w = width - pad.left - pad.right, h = height - pad.top - pad.bottom;
+  const max = Math.ceil(Math.max(...data.map(p => p.gross)) / 1000) * 1000;
+  const pts = data.map((p, i) => [pad.left + i / (data.length - 1) * w, pad.top + h - p.gross / max * h]);
+  let d = `M${pts[0][0]},${pts[0][1]}`;
+  for (let i = 0; i < pts.length - 1; i += 1) {
+    const [p0, p1, p2, p3] = [pts[i - 1] ?? pts[i], pts[i], pts[i + 1], pts[i + 2] ?? pts[i + 1]];
+    d += ` C${p1[0] + (p2[0] - p0[0]) / 6},${p1[1] + (p2[1] - p0[1]) / 6} ${p2[0] - (p3[0] - p1[0]) / 6},${p2[1] - (p3[1] - p1[1]) / 6} ${p2[0]},${p2[1]}`;
+  }
+  let svg = `<svg viewBox="0 0 ${width} ${height}" font-family="Nunito Sans" font-size="12"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${fill}" stop-opacity=".55"/><stop offset="1" stop-color="${fill}" stop-opacity="0"/></linearGradient></defs>`;
+  for (let i = 0; i <= 3; i += 1) { const v = max / 3 * i; const y = pad.top + h - v / max * h; svg += `<line x1="${pad.left}" x2="${width - pad.right}" y1="${y}" y2="${y}" stroke="${grid}" stroke-dasharray="${i ? '3 5' : ''}"/><text x="${pad.left - 8}" y="${y + 4}" text-anchor="end" fill="${label}">${v ? `${(v / 1000).toLocaleString('pt-BR')} mil` : '0'}</text>`; }
+  svg += `<path d="${d} L${pts.at(-1)[0]},${pad.top + h} L${pts[0][0]},${pad.top + h} Z" fill="url(#g)"/><path d="${d}" fill="none" stroke="${stroke}" stroke-width="2.5" stroke-linecap="round"/>`;
+  data.forEach((p, i) => { if (i % 4 === 0 || i === data.length - 1) svg += `<text x="${pts[i][0]}" y="${height - 6}" text-anchor="middle" fill="${label}">${p.day}/10</text>`; });
+  const last = pts.at(-1);
+  return `${svg}<circle cx="${last[0]}" cy="${last[1]}" r="5" fill="${stroke}" stroke="#fff" stroke-width="2"/></svg>`;
+}
+
+const f = dash.funnel;
+document.getElementById('c_painel').innerHTML = side('Painel', { name: 'Dra. Ana Lima', first: 'Dra. Ana', role: 'Dentista' }) + `
+<div class="main" style="padding-bottom:24px">
+  <header class="hello" style="margin-bottom:18px"><div><p class="date">Painel do mês · até 28 de outubro</p><h1>Outubro, até agora</h1>
+    <p class="story">A clínica recebeu <b>R$&nbsp;48.320</b> e teve <b>R$&nbsp;17.950</b> de saídas. Sobraram <b>R$&nbsp;30.369</b> — ${pct(dash.kpis.netMargin).replace(',', ',')} do que entrou.</p></div>
+    <div class="actions"><span class="chip">Todos os dentistas <i data-lucide="chevron-down"></i></span><div class="segmented"><span><i data-lucide="chevron-left"></i></span><span class="on">Outubro</span><span><i data-lucide="chevron-right"></i></span></div></div></header>
+  <div class="trio">
+    <div class="soft" style="background:#DFEDE3"><small style="color:#2F6B47"><i data-lucide="arrow-down-left"></i>Entradas</small><b>${brl(dash.summary.generalGross)}</b><span>Ticket médio de ${brl(dash.kpis.averageTicket)}</span></div>
+    <div class="soft" style="background:#F6E3D8"><small style="color:#8E3F1F"><i data-lucide="arrow-up-right"></i>Saídas</small><b>${brl(dash.summary.totalOutflows)}</b><span>37,1% do que entrou</span></div>
+    <div class="soft" style="background:#ECE4F5"><small style="color:#63468E"><i data-lucide="users"></i>Pacientes atendidos</small><b>${dash.summary.patientCount}</b><span>Em 24 dias de atendimento</span></div>
+  </div>
+  <div class="duo">
+    <div class="panel"><h3>Entradas ao longo do mês</h3><p>Valor recebido por dia de atendimento</p>${area({ width: 760, data: dash.daily, stroke: '#2E5245', fill: '#8FB5A3', grid: '#E4DCCF', label: '#7D8781', height: 196 })}</div>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div class="attnbig"><span class="flag"><i data-lucide="triangle-alert" style="width:15px;height:15px"></i>Atenção às faltas</span><b>${pct(dash.alert.value)}</b><p>das consultas do mês tiveram falta. O combinado é ficar abaixo de ${dash.alert.threshold}%.</p><span class="btn sm">Ver agenda</span></div>
+      <div class="panel"><h3 style="margin-bottom:12px">${f.total} consultas no mês</h3><div class="mini">
+        <div><i style="background:var(--s-concluido-fg)"></i>Concluídas<b>${f.completed}</b></div><div><i style="background:var(--s-agendado-fg)"></i>A realizar<b>${f.scheduled + f.confirmed}</b></div>
+        <div><i style="background:var(--s-cancelado-fg)"></i>Canceladas<b>${f.cancelled}</b></div><div><i style="background:var(--s-faltou-fg)"></i>Faltas<b>${f.noShow}</b></div></div></div>
+    </div>
+  </div>
+  <div class="dents">${dash.breakdown.map(b => `<div class="dentc">${avatar(b.name)}<span><b>${b.name}</b><small>saldo ${brl(b.balance)}</small></span><strong>${brl(b.gross)}</strong></div>`).join('')}</div>
+</div>`;
+
+document.getElementById('c_login').innerHTML = DF.statusBar + `
+<div class="blob"><span class="mark"></span></div>
+<div class="body"><h1>Boas-vindas ao DentalFlow</h1><p class="lead">Use o usuário e a senha que a clínica criou para você.</p>
+  <div class="field"><label>Usuário</label><div class="input">carla</div></div>
+  <div class="field"><label>Senha</label><div class="input pw focus">••••••••<i data-lucide="eye"></i></div></div>
+  <span class="btn primary lg">Entrar</span>
+  <p class="help">Esqueceu a senha? Peça ao responsável da clínica para criar uma nova.</p></div>`;
+
+const mtab = activeTab => `<nav class="tabbar">${[['sun', 'Hoje'], ['calendar-days', 'Agenda'], ['users', 'Pacientes'], ['ellipsis', 'Mais']].map(([icon, label]) => `<a class="${label === activeTab ? 'on' : ''}"><i data-lucide="${icon}"></i>${label}</a>`).join('')}</nav>`;
+document.getElementById('c_hoje').innerHTML = DF.statusBar + `
+<div class="m-hello"><small>Quarta, 28 de outubro</small><h1>Bom dia, Carla.</h1><p><b>14 consultas</b> hoje. <b>4 pacientes</b> ainda não confirmaram.</p></div>
+<div class="m-seg"><div class="segmented"><span class="on">Manhã <em>10</em></span><span>Tarde <em>4</em></span></div></div>
+<div class="m-list">${appointments.filter(a => a.next || a.id === 107 || a.id === 108).map(a => card(a)).join('')}</div>
+<span class="fab"><i data-lucide="plus"></i>Agendar</span>
+${mtab('Hoje')}`;
+
+document.getElementById('c_pacientes').innerHTML = DF.statusBar + `
+<div class="m-hello" style="padding-bottom:12px"><small>248 cadastrados</small><h1 style="margin-bottom:0">Pacientes</h1></div>
+<div class="m-search"><i data-lucide="search"></i>Buscar pelo nome</div>
+<div class="m-chips"><span class="chip on">Todos</span><span class="chip">Com consulta hoje</span></div>
+<div class="m-card">${patients.slice(0, 7).map(p => `<div class="prow">${avatar(p.name)}<span><b>${p.name}</b><small>${p.phone}</small></span><i data-lucide="chevron-right"></i></div>`).join('')}</div>
+<div style="height:14px"></div>
+<span class="fab"><i data-lucide="user-plus"></i>Novo</span>
+${mtab('Pacientes')}`;
+
+document.getElementById('c_novo').innerHTML = DF.statusBar + `
+<div class="m-bar"><span class="ib"><i data-lucide="arrow-left"></i></span><h1>Novo paciente</h1></div>
+<div class="m-form">
+  <div class="acc"><div class="acc-h"><span class="n">1</span><span><b>Dados pessoais</b><small>Nome, CPF e nascimento</small></span><i data-lucide="chevron-up"></i></div>
+    <div class="acc-b">
+      <div class="field"><label>Nome completo</label><div class="input">Maria Eduarda Lopes</div></div>
+      <div class="field"><label>CPF</label><div class="input err">123.456.789-00</div><p class="errmsg"><i data-lucide="circle-alert"></i>Já existe um paciente com este CPF na clínica.</p></div>
+      <div class="field"><label>Data de nascimento <span>(opcional)</span></label><div class="input focus">20/05/19</div></div>
+    </div></div>
+  <div class="acc closed"><div class="acc-h"><span class="n">2</span><span><b>Contato</b><small>Celular e e-mail · opcionais</small></span><i data-lucide="chevron-down"></i></div></div>
+  <div class="acc closed"><div class="acc-h"><span class="n">3</span><span><b>Endereço</b><small>CEP, rua e bairro</small></span><i data-lucide="chevron-down"></i></div></div>
+</div>
+<div class="m-foot"><span class="btn primary lg">Salvar paciente</span></div>`;
+
+lucide.createIcons();
+</script>
+</body>
+</html>

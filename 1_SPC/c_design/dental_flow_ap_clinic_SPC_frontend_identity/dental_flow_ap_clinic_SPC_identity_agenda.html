@@ -1,0 +1,469 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Agenda combinada — Direção A</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/lucide@0.469.0/dist/umd/lucide.min.js"></script>
+<script src="dental_flow_ap_clinic_SPC_identity_common.js"></script>
+<style>
+/* Base da direção A (copiada de dental_flow_ap_clinic_SPC_identity_direction_a.html). */
+:root {
+  --bg: #F6F2EC; --surface: #FFFFFF; --surface-2: #FBF8F4; --ink: #1B2529; --muted: #5F6B70; --line: #EAE3D9;
+  --primary: #0D6E66; --primary-soft: #E1F0EC; --accent: #E8613C; --accent-soft: #FDE9E2; --wa: #1E8E4E; --wa-soft: #E3F4EA;
+  --s-agendado-fg: #855700; --s-agendado-bg: #FFF0CC; --s-confirmado-fg: #1D7A45; --s-confirmado-bg: #E2F3E8;
+  --s-atendimento-fg: #5B45C2; --s-atendimento-bg: #EDE9FC; --s-concluido-fg: #2F5E9E; --s-concluido-bg: #E5EDF8;
+  --s-cancelado-fg: #B23B3B; --s-cancelado-bg: #FBE7E7; --s-faltou-fg: #5F6B70; --s-faltou-bg: #EEEFEF;
+  --font: 'Figtree', system-ui, sans-serif;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: var(--font); background: #D9DCDF; color: var(--ink); padding: 40px; display: flex; flex-direction: column; gap: 56px; align-items: flex-start; -webkit-font-smoothing: antialiased; }
+.board { padding: 4px; }
+.tag { font: 600 15px/1.3 var(--font); color: #3A4448; margin-bottom: 16px; display: flex; gap: 10px; align-items: center; }
+.tag b { background: #1B2529; color: #fff; padding: 4px 10px; border-radius: 6px; }
+.frame { background: var(--bg); overflow: hidden; position: relative; }
+.desktop { width: 1440px; height: 900px; border-radius: 12px; box-shadow: 0 20px 50px rgba(0,0,0,.16); display: flex; flex-direction: column; }
+.phones .row { display: flex; gap: 40px; padding: 12px; }
+.phone { width: 390px; height: 844px; border-radius: 46px; box-shadow: 0 0 0 10px #14181A, 0 30px 60px rgba(0,0,0,.28); display: flex; flex-direction: column; }
+.statusbar { height: 46px; flex: none; display: flex; justify-content: space-between; align-items: center; padding: 6px 30px 0 34px; font-weight: 600; font-size: 15px; }
+.statusbar-icons { display: flex; gap: 6px; } .statusbar-icons svg { width: 16px; height: 16px; }
+svg.lucide { width: 20px; height: 20px; stroke-width: 2; flex: none; }
+
+/* Marca: o símbolo original vira um ícone de aplicativo. */
+.mark { width: 38px; height: 38px; border-radius: 11px; background: #01101F url(dental_flow_ap_clinic_SPC_identity_logo.png) no-repeat; background-size: 190%; background-position: 50% 14%; flex: none; }
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -.4px; }
+.brand span b { color: var(--primary); font-weight: 800; }
+
+.avatar { width: 44px; height: 44px; border-radius: 50%; display: grid; place-items: center; font-weight: 700; font-size: 15px; flex: none; }
+.avatar.sm { width: 36px; height: 36px; font-size: 13px; }
+.avatar.xl { width: 68px; height: 68px; font-size: 24px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px 0 10px; border-radius: 999px; font-weight: 600; font-size: 14px; white-space: nowrap; }
+.pill svg.lucide { width: 16px; height: 16px; stroke-width: 2.4; }
+.s-agendado { color: var(--s-agendado-fg); background: var(--s-agendado-bg); }
+.s-confirmado { color: var(--s-confirmado-fg); background: var(--s-confirmado-bg); }
+.s-atendimento { color: var(--s-atendimento-fg); background: var(--s-atendimento-bg); }
+.s-concluido { color: var(--s-concluido-fg); background: var(--s-concluido-bg); }
+.s-cancelado { color: var(--s-cancelado-fg); background: var(--s-cancelado-bg); }
+.s-faltou { color: var(--s-faltou-fg); background: var(--s-faltou-bg); }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; height: 46px; padding: 0 18px; border-radius: 12px; font: 600 16px var(--font); border: 1.5px solid transparent; white-space: nowrap; }
+.btn.primary { background: var(--primary); color: #fff; }
+.btn.ghost { background: var(--surface); border-color: var(--line); color: var(--ink); }
+.btn.wa { background: var(--wa); color: #fff; }
+.btn.danger { color: var(--s-cancelado-fg); }
+.btn.lg { height: 54px; font-size: 17px; border-radius: 14px; width: 100%; }
+
+/* Desktop */
+.top { height: 68px; flex: none; display: flex; align-items: center; gap: 36px; padding: 0 32px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.tabs { display: flex; gap: 4px; }
+.tabs a { display: flex; align-items: center; gap: 8px; height: 42px; padding: 0 16px; border-radius: 999px; font-weight: 600; font-size: 16px; color: var(--muted); }
+.tabs a.on { background: var(--primary-soft); color: var(--primary); }
+.search { margin-left: auto; width: 320px; height: 44px; border-radius: 999px; background: var(--bg); display: flex; align-items: center; gap: 10px; padding: 0 16px; color: var(--muted); font-size: 15px; }
+.me { display: flex; align-items: center; gap: 10px; }
+.me b { display: block; font-size: 15px; } .me small { display: block; color: var(--muted); font-size: 13px; }
+.page { flex: 1; display: grid; grid-template-columns: 1fr 440px; gap: 28px; padding: 28px 32px 0; min-height: 0; }
+.col { display: flex; flex-direction: column; min-height: 0; }
+.head { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 20px; }
+.head h1 { font-size: 34px; font-weight: 800; letter-spacing: -.8px; line-height: 1.1; }
+.head p { color: var(--muted); font-size: 16px; margin-top: 4px; }
+.days { display: flex; gap: 8px; margin-bottom: 16px; }
+.day { width: 64px; height: 68px; border-radius: 16px; background: var(--surface); border: 1px solid var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; }
+.day small { font-size: 13px; color: var(--muted); font-weight: 600; } .day b { font-size: 20px; }
+.day.on { background: var(--primary); border-color: var(--primary); color: #fff; } .day.on small { color: #CDEBE6; }
+.day i.dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+.chips { display: flex; gap: 8px; margin-bottom: 16px; }
+.chip { height: 38px; padding: 0 14px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); display: inline-flex; align-items: center; gap: 8px; font-weight: 600; font-size: 15px; }
+.chip span { color: var(--muted); font-weight: 600; }
+.chip.on { background: var(--ink); border-color: var(--ink); color: #fff; } .chip.on span { color: #B9C3C6; }
+.list { background: var(--surface); border-radius: 20px 20px 0 0; border: 1px solid var(--line); border-bottom: 0; padding: 8px 8px 0; flex: 1; overflow: hidden; }
+.group { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: var(--muted); padding: 12px 14px 6px; }
+.item { display: grid; grid-template-columns: 64px 44px 1fr auto; gap: 14px; align-items: center; padding: 9px 14px; border-radius: 14px; }
+.item .time b { font-size: 17px; display: block; font-variant-numeric: tabular-nums; } .item .time small { color: var(--muted); font-size: 13px; }
+.item .who b { font-size: 16px; font-weight: 700; display: block; } .item .who small { color: var(--muted); font-size: 14px; }
+.item.sel { background: var(--primary-soft); box-shadow: inset 3px 0 0 var(--primary); }
+.item.past .who b, .item.past .time b { color: var(--muted); }
+.item.cancel .who b { text-decoration: line-through; text-decoration-color: #b8bfc2; }
+.now { display: flex; align-items: center; gap: 10px; margin: 4px 14px; color: var(--accent); font-weight: 700; font-size: 13px; }
+.now::after { content: ''; flex: 1; height: 2px; background: var(--accent); border-radius: 2px; }
+.now i { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px var(--accent-soft); }
+
+.detail { background: var(--surface); border-radius: 24px; border: 1px solid var(--line); padding: 26px; align-self: start; display: flex; flex-direction: column; gap: 22px; }
+.d-top { display: flex; gap: 16px; align-items: center; }
+.d-top h2 { font-size: 24px; font-weight: 800; letter-spacing: -.4px; } .d-top p { color: var(--muted); font-size: 15px; margin-top: 2px; }
+.quick { display: grid; grid-template-columns: 1.2fr 1fr 1fr; gap: 8px; }
+.quick .btn { height: 44px; font-size: 15px; padding: 0 12px; }
+.facts { display: flex; flex-direction: column; gap: 14px; padding: 18px; background: var(--surface-2); border-radius: 16px; }
+.facts div { display: grid; grid-template-columns: 24px 1fr; gap: 12px; }
+.facts dt { color: var(--muted); } .facts dt svg.lucide { width: 20px; height: 20px; }
+.facts dd small { display: block; color: var(--muted); font-size: 13px; font-weight: 600; } .facts dd { font-size: 16px; font-weight: 500; }
+.steps { display: flex; align-items: center; }
+.step { display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--muted); width: 25%; position: relative; text-align: center; }
+.step i { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--bg); border: 2px solid var(--line); z-index: 1; }
+.step i svg.lucide { width: 14px; height: 14px; stroke-width: 3; }
+.step::before { content: ''; position: absolute; top: 12px; right: 50%; width: 100%; height: 2px; background: var(--line); }
+.step:first-child::before { display: none; }
+.step.done i { background: var(--primary); border-color: var(--primary); color: #fff; } .step.done::before, .step.cur::before { background: var(--primary); }
+.step.cur i { border-color: var(--primary); background: #fff; box-shadow: 0 0 0 4px var(--primary-soft); } .step.cur { color: var(--ink); }
+.step.done { color: var(--ink); }
+.more { display: flex; gap: 8px; } .more .btn { flex: 1; height: 44px; font-size: 15px; }
+
+/* Painel */
+.dash { flex: 1; padding: 28px 32px; display: flex; flex-direction: column; gap: 18px; }
+.monthsw { display: flex; align-items: center; gap: 8px; }
+.icon-btn { width: 44px; height: 44px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); display: grid; place-items: center; }
+.monthsw b { font-size: 17px; padding: 0 8px; }
+.alert { display: flex; align-items: center; gap: 14px; background: #FFF4DA; border: 1px solid #F3D99A; color: #6E4A00; padding: 14px 18px; border-radius: 16px; font-size: 16px; }
+.alert .ic { width: 38px; height: 38px; border-radius: 50%; background: #FFE3A3; display: grid; place-items: center; }
+.alert a { margin-left: auto; font-weight: 700; color: #6E4A00; text-decoration: underline; text-underline-offset: 3px; }
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px; }
+.kpi .ic { width: 40px; height: 40px; border-radius: 12px; display: grid; place-items: center; margin-bottom: 6px; }
+.kpi small { color: var(--muted); font-size: 15px; font-weight: 600; } .kpi b { font-size: 30px; font-weight: 800; letter-spacing: -.8px; font-variant-numeric: tabular-nums; } .kpi span { color: var(--muted); font-size: 14px; }
+.kpi.hero { background: var(--primary); border-color: var(--primary); color: #fff; } .kpi.hero small, .kpi.hero span { color: #CDEBE6; } .kpi.hero .ic { background: rgba(255,255,255,.14); }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1fr) 420px; gap: 16px; }
+.card svg { max-width: 100%; height: auto; }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 20px 22px; }
+.card h3 { font-size: 18px; font-weight: 700; display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+.legend { display: flex; gap: 16px; font-size: 14px; color: var(--muted); font-weight: 500; }
+.legend span { display: inline-flex; align-items: center; gap: 6px; } .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
+.donutbox { display: flex; gap: 24px; align-items: center; }
+.donutwrap { position: relative; } .donutwrap div { position: absolute; inset: 0; display: grid; place-items: center; text-align: center; }
+.donutwrap b { font-size: 30px; font-weight: 800; display: block; line-height: 1; } .donutwrap small { color: var(--muted); font-size: 13px; }
+.dl { display: flex; flex-direction: column; gap: 12px; flex: 1; }
+.dl div { display: flex; align-items: center; gap: 10px; font-size: 15px; } .dl b { margin-left: auto; font-variant-numeric: tabular-nums; }
+.dl i { width: 12px; height: 12px; border-radius: 4px; }
+.dentists { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+.dent { display: flex; align-items: center; gap: 14px; }
+.dent .bar { height: 8px; border-radius: 99px; background: var(--bg); margin-top: 8px; overflow: hidden; } .dent .bar i { display: block; height: 100%; background: var(--primary); border-radius: 99px; }
+.dent b { font-size: 16px; } .dent small { color: var(--muted); font-size: 14px; display: block; }
+.dent .val { margin-left: auto; text-align: right; } .dent .val b { font-size: 18px; font-variant-numeric: tabular-nums; }
+
+/* Celular */
+.m-head { display: flex; align-items: center; justify-content: space-between; padding: 8px 20px 12px; }
+.m-head small { color: var(--muted); font-size: 15px; font-weight: 600; } .m-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.8px; }
+.m-days { display: flex; gap: 6px; padding: 0 16px 12px; }
+.m-days .day { width: auto; flex: 1; height: 62px; border-radius: 14px; }
+.m-days .day b { font-size: 18px; }
+.m-chips { display: flex; gap: 8px; padding: 0 16px 12px; overflow: hidden; }
+.m-chips .chip { flex: none; }
+.m-body { flex: 1; overflow: hidden; background: var(--surface); border-radius: 24px 24px 0 0; padding: 6px 6px 0; }
+.m-body .item { grid-template-columns: 50px 40px 1fr auto; gap: 10px; padding: 9px 10px; }
+.m-body .avatar { width: 40px; height: 40px; font-size: 14px; }
+.m-body .item .who b { font-size: 16px; } .m-body .item .who small { font-size: 13.5px; }
+.m-body .item .time b { font-size: 16px; }
+.sticon { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; } .sticon svg.lucide { width: 16px; height: 16px; stroke-width: 2.5; }
+.tabbar { height: 84px; flex: none; background: var(--surface); border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px 10px 22px; }
+.tabbar a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; font-size: 12.5px; font-weight: 600; color: var(--muted); }
+.tabbar a svg.lucide { width: 24px; height: 24px; }
+.tabbar a.on { color: var(--primary); } .tabbar a.on span.ic { background: var(--primary-soft); }
+.tabbar span.ic { width: 56px; height: 30px; border-radius: 99px; display: grid; place-items: center; }
+.fab { position: absolute; right: 18px; bottom: 100px; height: 58px; padding: 0 22px 0 18px; border-radius: 20px; background: var(--primary); color: #fff; display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 16px; box-shadow: 0 10px 24px rgba(13,110,102,.35); }
+.fab svg.lucide { width: 24px; height: 24px; }
+.m-search { margin: 0 16px 10px; height: 50px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); display: flex; align-items: center; gap: 10px; padding: 0 18px; color: var(--muted); font-size: 16px; }
+.letter { font-size: 14px; font-weight: 800; color: var(--primary); padding: 12px 16px 4px; }
+.prow { display: grid; grid-template-columns: 44px 1fr auto; gap: 12px; align-items: center; padding: 9px 12px; }
+.prow b { font-size: 16.5px; display: block; } .prow small { color: var(--muted); font-size: 14px; }
+.prow .call { width: 42px; height: 42px; border-radius: 50%; background: var(--wa-soft); color: var(--wa); display: grid; place-items: center; }
+.nudge { margin: 0 16px 12px; padding: 12px 14px; border-radius: 16px; background: var(--s-agendado-bg); color: var(--s-agendado-fg); display: flex; align-items: center; gap: 10px; font-size: 15px; font-weight: 600; }
+.nudge a { margin-left: auto; text-decoration: underline; text-underline-offset: 3px; }
+
+.appbar { height: 56px; display: flex; align-items: center; gap: 8px; padding: 0 12px; flex: none; }
+.appbar h1 { font-size: 20px; font-weight: 800; flex: 1; }
+.appbar .icon-btn { border: 0; background: transparent; }
+.form { flex: 1; overflow: hidden; padding: 4px 16px 0; display: flex; flex-direction: column; gap: 14px; }
+.fsec { background: var(--surface); border-radius: 20px; padding: 16px; display: flex; flex-direction: column; gap: 14px; border: 1px solid var(--line); }
+.fsec h2 { font-size: 17px; font-weight: 800; display: flex; align-items: center; gap: 8px; }
+.fsec h2 svg.lucide { color: var(--primary); }
+.field label { display: block; font-weight: 700; font-size: 15px; margin-bottom: 6px; } .field label span { color: var(--muted); font-weight: 500; }
+.input { height: 52px; border-radius: 14px; border: 1.5px solid #D9D1C5; background: var(--surface); padding: 0 14px; display: flex; align-items: center; font-size: 17px; }
+.input.ph { color: #8C9497; }
+.input.err { border: 2px solid var(--s-cancelado-fg); }
+.input.focus { border: 2px solid var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); }
+.errmsg { color: var(--s-cancelado-fg); font-size: 14.5px; font-weight: 600; margin-top: 6px; display: flex; gap: 6px; align-items: center; }
+.errmsg svg.lucide { width: 16px; height: 16px; }
+.footer { flex: none; padding: 12px 16px 30px; background: var(--surface); border-top: 1px solid var(--line); }
+
+.login { background: var(--surface); }
+.login .hero { background: var(--primary-soft); margin: 8px 12px 0; border-radius: 32px; padding: 34px 26px 30px; display: flex; flex-direction: column; gap: 18px; position: relative; overflow: hidden; }
+.login .hero::after { content: ''; position: absolute; right: -60px; top: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(13,110,102,.08); }
+.login .hero .mark { width: 64px; height: 64px; border-radius: 18px; }
+.login .hero h1 { font-size: 30px; font-weight: 800; letter-spacing: -.8px; line-height: 1.1; }
+.login .hero p { font-size: 16.5px; color: #35484E; line-height: 1.45; }
+.login form { padding: 26px 24px 0; display: flex; flex-direction: column; gap: 18px; }
+.login .help { margin: auto 24px 40px; display: flex; gap: 10px; color: var(--muted); font-size: 15px; line-height: 1.45; padding: 14px; border-radius: 16px; background: var(--bg); }
+.login .help svg.lucide { color: var(--primary); }
+.pw { justify-content: space-between; letter-spacing: 3px; }
+.pw svg.lucide { color: var(--muted); }
+/* Agenda semanal combinada: grade da tela atual (x = dias, y = horas, altura = duração)
+   com os cartões e o "Próximo" da direção B, na identidade da direção A. */
+:root { --hour: 70px; --now-line: #E8613C; --now-text: #B9472A; }
+.ag { flex: 1; display: flex; flex-direction: column; padding: 20px 28px 0; min-height: 0; }
+.ag-head { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.ag-head h1 { font-size: 32px; font-weight: 800; letter-spacing: -.8px; line-height: 1; }
+.ag-head p { color: var(--muted); font-size: 15.5px; margin-top: 5px; }
+.ag-head .sp { flex: 1; }
+.nav3 { display: flex; gap: 6px; align-items: center; }
+.nav3 .icon-btn { width: 42px; height: 42px; }
+.nav3 .today { height: 42px; padding: 0 16px; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); display: inline-flex; align-items: center; font-weight: 700; font-size: 15px; }
+.seg { display: inline-flex; background: #EDE7DE; border-radius: 12px; padding: 4px; }
+.seg span { height: 36px; padding: 0 16px; border-radius: 9px; display: inline-flex; align-items: center; font-weight: 700; font-size: 15px; color: var(--muted); }
+.seg span.on { background: var(--surface); color: var(--ink); box-shadow: 0 1px 4px rgba(40,30,20,.12); }
+.ag-filters { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+.chip .avatar { width: 24px; height: 24px; font-size: 10.5px; margin-left: -6px; }
+.legend2 { margin-left: auto; display: flex; gap: 14px; font-size: 13.5px; font-weight: 600; color: var(--muted); }
+.legend2 span { display: inline-flex; align-items: center; gap: 6px; }
+.legend2 i { width: 10px; height: 10px; border-radius: 3px; }
+.next { display: flex; align-items: center; gap: 16px; background: var(--ink); color: #fff; border-radius: 16px; padding: 10px 12px 10px 18px; margin-bottom: 12px; }
+.next .lbl { color: #8EE3D6; font-weight: 800; font-size: 12.5px; letter-spacing: 1px; text-transform: uppercase; display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.next .lbl i.pulse { width: 8px; height: 8px; border-radius: 50%; background: #8EE3D6; box-shadow: 0 0 0 4px rgba(142,227,214,.22); }
+.next .clock { font-size: 28px; font-weight: 800; letter-spacing: -.8px; font-variant-numeric: tabular-nums; }
+.next b { font-size: 17px; } .next small { color: #B8C4C7; font-size: 14.5px; display: block; }
+.next .acts { margin-left: auto; display: flex; gap: 8px; }
+.next .btn { height: 42px; font-size: 15px; }
+.next .btn.light { background: #8EE3D6; color: var(--ink); }
+.next .btn.dark { background: rgba(255,255,255,.1); color: #fff; }
+
+.week { flex: 1; background: var(--surface); border: 1px solid var(--line); border-bottom: 0; border-radius: 20px 20px 0 0; display: flex; flex-direction: column; min-height: 0; overflow: hidden; }
+.wk-head { display: grid; grid-template-columns: 58px repeat(7, 1fr); border-bottom: 1px solid var(--line); flex: none; }
+.wk-head div { padding: 10px 12px; display: flex; flex-direction: column; gap: 1px; border-left: 1px solid var(--line); }
+.wk-head div:first-child { border-left: 0; }
+.wk-head b { font-size: 16px; font-weight: 800; } .wk-head b span { color: var(--muted); font-weight: 600; margin-right: 4px; }
+.wk-head small { color: var(--muted); font-size: 13px; font-weight: 600; }
+.wk-head .on { background: var(--primary-soft); } .wk-head .on b, .wk-head .on b span { color: var(--primary); }
+.wk-head .on small { color: var(--primary); }
+.wk-head .past b { color: var(--muted); }
+.wk-body { flex: 1; position: relative; display: grid; grid-template-columns: 58px repeat(7, 1fr); overflow: hidden; }
+.hours div { height: var(--hour); font-size: 12.5px; font-weight: 700; color: var(--muted); text-align: right; padding: 0 10px 0 0; transform: translateY(-8px); }
+.hours div:first-child { visibility: hidden; }
+.wcol { position: relative; border-left: 1px solid var(--line);
+  background-image: repeating-linear-gradient(to bottom, var(--line) 0, var(--line) 1px, transparent 1px, transparent calc(var(--hour) / 2), #F3EEE7 calc(var(--hour) / 2), #F3EEE7 calc(var(--hour) / 2 + 1px), transparent calc(var(--hour) / 2 + 1px), transparent var(--hour)); }
+.wcol.today { background-color: #F5FAF8; }
+.wcol.closed { background-color: #FBF8F4; }
+.wcol.closed::after { content: 'Sem consultas'; position: absolute; top: 18px; left: 0; right: 0; text-align: center; color: #A0A8AB; font-size: 13px; font-weight: 600; }
+.ev { position: absolute; border-radius: 9px; padding: 3px 6px 3px 9px; overflow: hidden; display: flex; flex-direction: column; gap: 1px; font-size: 12.5px; line-height: 1.22; border: 1px solid rgba(255,255,255,.9); }
+.ev::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; background: var(--bar); }
+.ev .t { display: flex; align-items: center; gap: 4px; font-weight: 700; color: var(--fg); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ev .t svg.lucide { width: 13px; height: 13px; stroke-width: 2.6; margin-left: auto; }
+.ev b { font-size: 13px; font-weight: 700; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ev small { color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; font-size: 12px; }
+.ev .who { display: flex; align-items: center; gap: 5px; margin-top: auto; color: var(--muted); font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; }
+.ev .who .avatar { width: 18px; height: 18px; font-size: 8.5px; }
+.ev.one b { display: inline; } .ev.one { flex-direction: row; align-items: center; gap: 5px; white-space: nowrap; }
+.ev.past { opacity: .72; }
+.ev.cancel b { text-decoration: line-through; color: var(--muted); }
+.ev.sel { box-shadow: 0 0 0 2.5px var(--primary), 0 8px 18px rgba(13,110,102,.25); z-index: 3; }
+.s-agendado-v { --bg: var(--s-agendado-bg); --fg: var(--s-agendado-fg); --bar: #E5A21A; }
+.s-confirmado-v { --bg: var(--s-confirmado-bg); --fg: var(--s-confirmado-fg); --bar: #2E9A5B; }
+.s-atendimento-v { --bg: var(--s-atendimento-bg); --fg: var(--s-atendimento-fg); --bar: #7B66D9; }
+.s-concluido-v { --bg: var(--s-concluido-bg); --fg: var(--s-concluido-fg); --bar: #5A85C2; }
+.s-cancelado-v { --bg: var(--s-cancelado-bg); --fg: var(--s-cancelado-fg); --bar: #D16464; }
+.s-faltou-v { --bg: var(--s-faltou-bg); --fg: var(--s-faltou-fg); --bar: #9AA3A6; }
+.ev { background: var(--bg); }
+.nowl { position: absolute; height: 2px; background: var(--now-line); z-index: 4; }
+.nowl::before { content: ''; position: absolute; left: -5px; top: -4px; width: 10px; height: 10px; border-radius: 50%; background: var(--now-line); }
+.nowt { position: absolute; left: 4px; z-index: 4; background: var(--now-text); color: #fff; font-size: 11.5px; font-weight: 800; border-radius: 6px; padding: 2px 5px; transform: translateY(-50%); }
+
+.drawer { position: absolute; top: 68px; right: 0; bottom: 0; width: 440px; background: var(--surface); box-shadow: -24px 0 50px rgba(27,37,41,.16); border-left: 1px solid var(--line); padding: 18px 24px; display: flex; flex-direction: column; gap: 18px; z-index: 10; }
+.drawer .dh { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-weight: 700; font-size: 14px; text-transform: uppercase; letter-spacing: .8px; }
+.drawer .detail { border: 0; padding: 0; background: transparent; border-radius: 0; }
+
+/* Celular */
+.m-ag { flex: 1; display: flex; flex-direction: column; min-height: 0; }
+.m-ag .m-head { padding-bottom: 10px; }
+.m-ag .m-head h1 { font-size: 28px; }
+.m-seg { padding: 0 16px 10px; } .m-seg .seg { display: flex; } .m-seg .seg span { flex: 1; justify-content: center; }
+.m-days .day i { width: 5px; height: 5px; border-radius: 50%; background: var(--primary); margin-top: 1px; }
+.m-days .day.on i { background: #CDEBE6; }
+.m-grid { flex: 1; position: relative; display: grid; grid-template-columns: 46px 1fr; background: var(--surface); border-top: 1px solid var(--line); overflow: hidden; --hour: 66px; }
+.m-grid.three { grid-template-columns: 46px repeat(3, 1fr); }
+.m-grid .hours div { font-size: 12px; padding-right: 8px; }
+
+.m-colhead { display: grid; grid-template-columns: 46px repeat(3, 1fr); background: var(--surface); border-top: 1px solid var(--line); }
+.m-colhead div { text-align: center; padding: 8px 0; font-weight: 800; font-size: 15px; border-left: 1px solid var(--line); }
+.m-colhead div small { display: block; color: var(--muted); font-weight: 600; font-size: 12px; }
+.m-colhead div.on { color: var(--primary); background: var(--primary-soft); } .m-colhead div.on small { color: var(--primary); }
+.m-colhead div:first-child { border: 0; }
+.sheet-dim { position: absolute; inset: 0; background: rgba(20,28,31,.45); z-index: 5; }
+.sheet { position: absolute; left: 0; right: 0; bottom: 0; background: var(--surface); border-radius: 28px 28px 0 0; z-index: 6; padding: 10px 20px 30px; display: flex; flex-direction: column; gap: 16px; }
+.sheet .handle { width: 44px; height: 5px; border-radius: 9px; background: #D9D1C5; align-self: center; }
+.sheet .d-top h2 { font-size: 22px; }
+.sheet .when { display: flex; flex-direction: column; gap: 10px; padding: 14px 16px; background: var(--surface-2); border-radius: 16px; font-size: 15.5px; }
+.sheet .when div { display: flex; gap: 10px; align-items: center; } .sheet .when svg.lucide { color: var(--muted); width: 18px; height: 18px; }
+.sheet .quick .btn { height: 46px; }
+.sheet .steps .step { font-size: 12px; }
+</style>
+</head>
+<body>
+<div class="board"><p class="tag"><b>Agenda · Direção A</b> Semana com todos os dentistas · grade da tela atual + cartões e "Próximo" da proposta B · protótipo estático · dados fictícios</p><section class="frame desktop" id="w_all"></section></div>
+<div class="board"><p class="tag"><b>Agenda · Direção A</b> Semana filtrada por dentista, com a consulta aberta ao lado · protótipo estático · dados fictícios</p><section class="frame desktop" id="w_one"></section></div>
+<div class="board phones"><p class="tag"><b>Agenda · Direção A</b> Celular: dia, três dias e ações da consulta · protótipo estático · dados fictícios</p>
+  <div class="row">
+    <section class="frame phone" id="m_dia"></section>
+    <section class="frame phone" id="m_tres"></section>
+    <section class="frame phone" id="m_sheet"></section>
+  </div>
+</div>
+<script>
+const { status, dentist, initials, pick, minutes } = DF;
+const tones = [['#FCE3D6', '#9A3F1C'], ['#DDF0E6', '#1D6B45'], ['#E3E8FB', '#3446A3'], ['#F7E3EF', '#8E2F6B'], ['#FFEFC4', '#755000'], ['#DDEDF6', '#245D7E']];
+const avatar = (name, cls = '') => { const [bg, fg] = pick(name, tones); return `<span class="avatar ${cls}" style="background:${bg};color:${fg}">${initials(name)}</span>`; };
+const hm = m => `${String(Math.floor(m / 60)).padStart(2, '0')}:${String(m % 60).padStart(2, '0')}`;
+
+// Semana fictícia: quarta (hoje) reaproveita a lista do dia; os demais dias seguem a mesma regra de duração.
+const names = ['Helena Prado', 'Otávio Ramos', 'Lívia Castro', 'Marcos Teixeira', 'Juliana Freitas', 'Caio Moreira', 'Bianca Lopes', 'Rafael Cunha', 'Isabela Nunes', 'Pedro Henrique Dias', 'Larissa Melo', 'André Batista', 'Sofia Carvalho', 'Eduardo Pires', 'Natália Rezende', 'Felipe Araújo', 'Mariana Costa', 'Rodrigo Lima', 'Clara Vieira', 'Henrique Rocha', 'Paula Andrade', 'Diego Martins', 'Aline Ribeiro', 'Tiago Barbosa', 'Vitória Campos', 'Leonardo Faria', 'Carolina Pinto', 'Murilo Santos', 'Débora Gomes', 'Igor Monteiro', 'Lúcia Fernandes', 'Samuel Correia', 'Yasmin Duarte', 'Gustavo Pereira', 'Elisa Moura', 'Fábio Rocha', 'Tatiane Alves', 'Vinícius Sá', 'Priscila Torres', 'Hugo Azevedo', 'Renan Couto', 'Amanda Reis', 'Bruna Pacheco', 'Ciro Lacerda', 'Denise Macedo'];
+const pools = { 3: [['Manutenção do aparelho', 30], ['Avaliação', 30], ['Instalação de aparelho', 60], ['Manutenção do aparelho', 30]], 4: [['Limpeza', 60], ['Restauração', 45], ['Avaliação', 30], ['Extração', 45]], 5: [['Tratamento de canal', 90], ['Clareamento', 60], ['Avaliação', 30]] };
+const plan = [[5, 4, 3], [6, 5, 4], null, [4, 4, 3], [4, 3, 2], [2, 2, 0], [0, 0, 0]];
+const daysMeta = [['Seg', 26], ['Ter', 27], ['Qua', 28], ['Qui', 29], ['Sex', 30], ['Sáb', 31], ['Dom', 1]];
+let seed = 11; const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+let ni = 0;
+const week = daysMeta.map(([wd, d], di) => {
+  if (!plan[di]) return DF.appointments.map(a => ({ ...a, s: minutes(a.time), e: minutes(a.time) + a.min, day: di }));
+  const list = [];
+  [3, 4, 5].forEach((dentistId, k) => {
+    let t = [480, 510, 540][Math.floor(rnd() * 3)];
+    for (let n = 0; n < plan[di][k]; n += 1) {
+      const [procedure, min] = pools[dentistId][Math.floor(rnd() * pools[dentistId].length)];
+      if (t >= 720 && t < 810) t = 810;
+      let st = di < 2 ? 'CONCLUIDO' : rnd() < .55 ? 'CONFIRMADO' : 'AGENDADO';
+      if (di < 2 && n === 2 && k === 0) st = 'FALTOU';
+      if (di === 1 && n === 3 && k === 1) st = 'CANCELADO';
+      list.push({ id: `${di}-${k}-${n}`, patient: names[ni++ % names.length], procedure, min, dentist: dentistId, status: st, s: t, e: t + min, time: hm(t), end: hm(t + min), day: di });
+      t += min + [0, 0, 15, 30, 60][Math.floor(rnd() * 5)];
+    }
+  });
+  return list.sort((a, b) => a.s - b.s);
+});
+
+// Distribui consultas simultâneas lado a lado dentro do dia.
+function lanes(items) {
+  let cluster = [], end = -1;
+  const flush = () => { const used = []; cluster.forEach(it => { let i = used.findIndex(e => e <= it.s); if (i < 0) { i = used.length; used.push(0); } used[i] = it.e; it.lane = i; }); cluster.forEach(it => { it.lanes = used.length; }); cluster = []; end = -1; };
+  for (const it of items) { if (cluster.length && it.s >= end) flush(); cluster.push(it); end = Math.max(end, it.e); }
+  flush();
+  return items;
+}
+
+function card(a, { from, hour, colWidth, todos, selected }) {
+  const k = status[a.status].key;
+  const h = (a.e - a.s) / 60 * hour - 3;
+  const w = colWidth / a.lanes;
+  const top = (a.s - from) / 60 * hour + 1.5;
+  const style = `top:${top}px;height:${h}px;left:calc(${a.lane / a.lanes * 100}% + 3px);width:calc(${100 / a.lanes}% - 6px)`;
+  const cls = `ev s-${k}-v ${a.day < 2 ? 'past' : ''} ${a.status === 'CANCELADO' ? 'cancel' : ''} ${selected ? 'sel' : ''}`;
+  const icon = `<i data-lucide="${status[a.status].icon}"></i>`;
+  const first = a.patient.split(' ').slice(0, w < 90 ? 1 : 2).join(' ');
+  if (h < 34) return `<div class="${cls} one" style="${style}"><span class="t">${a.time}</span><b>${first}</b></div>`;
+  const doc = dentist(a.dentist);
+  return `<div class="${cls}" style="${style}"><span class="t">${a.time}${w >= 80 ? `–${a.end}` : ''}${w >= 70 ? icon : ''}</span><b>${w < 90 ? first : a.patient}</b>
+    ${h >= 64 && w >= 80 ? `<small>${a.procedure}</small>` : ''}${todos && h >= 84 && w >= 80 ? `<span class="who">${avatar(doc.name)}${doc.short}</span>` : ''}</div>`;
+}
+
+function grid({ from, to, hour, list, colWidth, todos, selectedId, cols = daysMeta.map((_, i) => i), today = 2 }) {
+  const hours = []; for (let m = from; m < to; m += 60) hours.push(`<div style="height:${hour}px">${hm(m)}</div>`);
+  const dayCols = cols.map(di => {
+    const items = lanes(list(di).filter(a => a.s < to && a.e > from));
+    const closed = !list(di).length;
+    return `<div class="wcol ${di === today ? 'today' : ''} ${closed ? 'closed' : ''}" style="--hour:${hour}px">${items.map(a => card(a, { from, hour, colWidth, todos, selected: a.id === selectedId })).join('')}</div>`;
+  }).join('');
+  return { hours: `<div class="hours">${hours.join('')}</div>`, dayCols };
+}
+
+function topbar(who) {
+  const tabs = [['sun', 'Hoje'], ['calendar-days', 'Agenda'], ['users', 'Pacientes'], ['building-2', 'Clínica']];
+  return `<header class="top"><div class="brand"><span class="mark"></span><span>Dental<b>Flow</b></span></div>
+  <nav class="tabs">${tabs.map(([icon, label]) => `<a class="${label === 'Agenda' ? 'on' : ''}"><i data-lucide="${icon}"></i>${label}</a>`).join('')}</nav>
+  <label class="search"><i data-lucide="search"></i>Buscar paciente pelo nome</label>
+  <div class="me">${avatar(who)}<span><b>Carla</b><small>Recepção</small></span><i data-lucide="chevron-down"></i></div></header>`;
+}
+
+const total = week.flat().length;
+function weekFrame({ filter, next, selectedId }) {
+  const list = di => week[di].filter(a => !filter || a.dentist === filter);
+  const from = 8 * 60, to = 17 * 60, hour = 80;
+  const g = grid({ from, to, hour, list, colWidth: 189, todos: !filter, selectedId });
+  const nowTop = (minutes('09:40') - from) / 60 * hour;
+  const chips = `<span class="chip ${filter ? '' : 'on'}">Todos <span>${total}</span></span>` + DF.dentists.map(d => `<span class="chip ${filter === d.id ? 'on' : ''}">${avatar(d.name)}${d.short} <span>${week.flat().filter(a => a.dentist === d.id).length}</span></span>`).join('');
+  const legend = ['agendado', 'confirmado', 'atendimento', 'concluido', 'cancelado', 'faltou'].map(k => { const s = Object.values(status).find(v => v.key === k); return `<span><i class="s-${k}-v" style="background:var(--bar)"></i>${s.label}</span>`; }).join('');
+  const sel = DF.appointments.find(a => a.next);
+  return topbar('Carla Souza') + `<div class="ag">
+    <div class="ag-head"><div><h1>Agenda</h1><p>26 de outubro a 1 de novembro · ${filter ? week.flat().filter(a => a.dentist === filter).length : total} consultas</p></div><span class="sp"></span>
+      <div class="nav3"><span class="icon-btn"><i data-lucide="chevron-left"></i></span><span class="today">Hoje</span><span class="icon-btn"><i data-lucide="chevron-right"></i></span></div>
+      <div class="seg"><span>Dia</span><span class="on">Semana</span><span>Mês</span></div>
+      <span class="btn primary"><i data-lucide="plus"></i>Agendar consulta</span></div>
+    <div class="ag-filters">${chips}<div class="legend2">${legend}</div></div>
+    ${next ? `<div class="next"><span class="lbl"><i class="pulse"></i>Próximo · em 20 min</span><span class="clock">${sel.time}</span><span><b>${sel.patient}</b><small>${sel.procedure} · Dra. Ana · ${sel.min} min</small></span>
+      <div class="acts"><span class="btn light"><i data-lucide="stethoscope"></i>Iniciar atendimento</span><span class="btn dark"><i data-lucide="message-circle"></i>WhatsApp</span></div></div>` : ''}
+    <div class="week">
+      <div class="wk-head"><div></div>${daysMeta.map(([wd, d], di) => `<div class="${di === 2 ? 'on' : di < 2 ? 'past' : ''}"><b><span>${wd}</span>${d}</b><small>${di === 2 ? 'Hoje · ' : ''}${list(di).length} consultas</small></div>`).join('')}</div>
+      <div class="wk-body">${g.hours}${g.dayCols}
+        <span class="nowt" style="top:${nowTop}px">09:40</span>
+        <span class="nowl" style="top:${nowTop - 1}px;left:calc(58px + (100% - 58px) / 7 * 2);width:calc((100% - 58px) / 7)"></span></div>
+    </div></div>`;
+}
+
+document.getElementById('w_all').innerHTML = weekFrame({ next: true });
+document.getElementById('w_one').innerHTML = weekFrame({ filter: 3, selectedId: 106 }) + `
+<aside class="drawer">
+  <div class="dh">Consulta<span class="icon-btn" style="border:0"><i data-lucide="x"></i></span></div>
+  <div class="detail" style="gap:20px">
+    <div class="d-top">${avatar('Ana Clara Mendes', 'xl')}<div><h2>Ana Clara Mendes</h2><p>16 anos · (11) 99812-3344</p></div></div>
+    <div class="quick"><span class="btn wa"><i data-lucide="message-circle"></i>WhatsApp</span><span class="btn ghost"><i data-lucide="phone"></i>Ligar</span><span class="btn ghost"><i data-lucide="user-round"></i>Ficha</span></div>
+    <dl class="facts">
+      <div><dt><i data-lucide="clock"></i></dt><dd><small>Horário</small>Hoje, 10:00 às 10:30 · 30 min</dd></div>
+      <div><dt><i data-lucide="sparkles"></i></dt><dd><small>Procedimento</small>Manutenção do aparelho</dd></div>
+      <div><dt><i data-lucide="stethoscope"></i></dt><dd><small>Dentista</small>Dra. Ana Lima</dd></div>
+      <div><dt><i data-lucide="sticky-note"></i></dt><dd><small>Observação</small>Prefere atendimento pela manhã. Vem com a mãe.</dd></div>
+    </dl>
+    <div class="steps"><div class="step done"><i><i data-lucide="check"></i></i>Agendado</div><div class="step done"><i><i data-lucide="check"></i></i>Confirmado</div><div class="step cur"><i></i>Em atendimento</div><div class="step"><i></i>Concluído</div></div>
+    <span class="btn primary lg"><i data-lucide="stethoscope"></i>Iniciar atendimento</span>
+    <div class="more"><span class="btn ghost"><i data-lucide="calendar-sync"></i>Remarcar</span><span class="btn ghost danger"><i data-lucide="user-x"></i>Faltou</span><span class="btn ghost danger"><i data-lucide="x"></i>Cancelar</span></div>
+  </div>
+</aside>`;
+
+const mtab = active => `<nav class="tabbar">${[['sun', 'Hoje'], ['calendar-days', 'Agenda'], ['users', 'Pacientes'], ['ellipsis', 'Mais']].map(([icon, label]) => `<a class="${label === active ? 'on' : ''}"><span class="ic"><i data-lucide="${icon}"></i></span>${label}</a>`).join('')}</nav>`;
+const mDays = () => `<div class="m-days">${daysMeta.map(([wd, d], di) => `<div class="day ${di === 2 ? 'on' : ''}"><small>${wd}</small><b>${d}</b>${week[di].length ? '<i></i>' : ''}</div>`).join('')}</div>`;
+const mChips = active => `<div class="m-chips"><span class="chip ${active ? '' : 'on'}">Todos</span>${DF.dentists.map(d => `<span class="chip ${active === d.id ? 'on' : ''}">${avatar(d.name)}${d.short}</span>`).join('')}</div>`;
+function mGrid({ cols, filter, from, to, hour, three }) {
+  const list = di => week[di].filter(a => !filter || a.dentist === filter);
+  const g = grid({ from, to, hour, list, colWidth: three ? 104 : 310, todos: !filter, cols, selectedId: 106 });
+  const nowTop = (minutes('09:40') - from) / 60 * hour;
+  const nowLeft = three ? 'left:calc(46px);width:calc((100% - 46px) / 3)' : 'left:46px;right:0';
+  return `<div class="m-grid ${three ? 'three' : ''}" style="--hour:${hour}px">${g.hours}${g.dayCols}<span class="nowt" style="top:${nowTop}px;left:2px">09:40</span><span class="nowl" style="top:${nowTop - 1}px;${nowLeft}"></span></div>`;
+}
+
+document.getElementById('m_dia').innerHTML = DF.statusBar + `<div class="m-ag">
+  <div class="m-head"><div><small>Quarta, 28 de outubro · 14 consultas</small><h1>Agenda</h1></div>${avatar('Carla Souza')}</div>
+  <div class="m-seg"><div class="seg"><span class="on">Dia</span><span>3 dias</span><span>Mês</span></div></div>
+  ${mDays()}${mChips()}
+  ${mGrid({ cols: [2], from: 9 * 60, to: 16 * 60, hour: 66 })}</div>
+  <span class="fab"><i data-lucide="plus"></i>Agendar</span>${mtab('Agenda')}`;
+
+document.getElementById('m_tres').innerHTML = DF.statusBar + `<div class="m-ag">
+  <div class="m-head"><div><small>28 a 30 de outubro</small><h1>Agenda</h1></div>${avatar('Carla Souza')}</div>
+  <div class="m-seg"><div class="seg"><span>Dia</span><span class="on">3 dias</span><span>Mês</span></div></div>
+  ${mChips(3)}
+  <div class="m-colhead"><div></div><div class="on">Qua 28<small>Hoje</small></div><div>Qui 29<small>${week[3].filter(a => a.dentist === 3).length} consultas</small></div><div>Sex 30<small>${week[4].filter(a => a.dentist === 3).length} consultas</small></div></div>
+  ${mGrid({ cols: [2, 3, 4], filter: 3, from: 8 * 60, to: 15 * 60, hour: 66, three: true })}</div>
+  <span class="fab"><i data-lucide="plus"></i>Agendar</span>${mtab('Agenda')}`;
+
+document.getElementById('m_sheet').innerHTML = DF.statusBar + `<div class="m-ag">
+  <div class="m-head"><div><small>Quarta, 28 de outubro · 14 consultas</small><h1>Agenda</h1></div>${avatar('Carla Souza')}</div>
+  <div class="m-seg"><div class="seg"><span class="on">Dia</span><span>3 dias</span><span>Mês</span></div></div>
+  ${mDays()}${mChips()}
+  ${mGrid({ cols: [2], from: 9 * 60, to: 16 * 60, hour: 66 })}</div>
+  ${mtab('Agenda')}
+  <div class="sheet-dim"></div>
+  <div class="sheet"><span class="handle"></span>
+    <div class="d-top">${avatar('Ana Clara Mendes', 'xl')}<div><h2>Ana Clara Mendes</h2><p>16 anos · (11) 99812-3344</p></div></div>
+    <div class="when"><div><i data-lucide="clock"></i>Hoje, 10:00 às 10:30 · 30 min</div><div><i data-lucide="sparkles"></i>Manutenção do aparelho · Dra. Ana</div></div>
+    <div class="quick"><span class="btn wa"><i data-lucide="message-circle"></i>WhatsApp</span><span class="btn ghost"><i data-lucide="phone"></i>Ligar</span><span class="btn ghost"><i data-lucide="user-round"></i>Ficha</span></div>
+    <div class="steps"><div class="step done"><i><i data-lucide="check"></i></i>Agendado</div><div class="step done"><i><i data-lucide="check"></i></i>Confirmado</div><div class="step cur"><i></i>Em atendimento</div><div class="step"><i></i>Concluído</div></div>
+    <span class="btn primary lg"><i data-lucide="stethoscope"></i>Iniciar atendimento</span>
+    <div class="more"><span class="btn ghost">Remarcar</span><span class="btn ghost danger">Faltou</span><span class="btn ghost danger">Cancelar</span></div>
+  </div>`;
+
+lucide.createIcons();
+</script>
+</body>
+</html>

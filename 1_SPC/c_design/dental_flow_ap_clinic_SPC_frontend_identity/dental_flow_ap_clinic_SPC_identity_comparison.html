@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><title>Comparação das direções</title>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+* { box-sizing: border-box; margin: 0; }
+body { font-family: Figtree, sans-serif; background: #E7E9EB; padding: 32px; }
+.board { width: 1520px; }
+h1 { font-size: 30px; font-weight: 800; color: #1B2529; } .sub { color: #4B575C; font-size: 17px; margin: 6px 0 24px; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+figure { background: #fff; border-radius: 16px; padding: 14px; box-shadow: 0 8px 24px rgba(0,0,0,.08); }
+figure img { width: 100%; display: block; border-radius: 8px; border: 1px solid #E3E5E7; }
+figcaption { display: flex; gap: 10px; align-items: baseline; padding: 4px 4px 12px; font-size: 16px; color: #4B575C; }
+figcaption b { font-size: 19px; color: #1B2529; }
+</style></head><body><div class="board">
+<h1>Mesma tela, quatro olhares: agenda do dia na recepção</h1>
+<p class="sub">Atual = captura da implementação (semana, 1366 px). A, B e C = protótipos estáticos com o mesmo conteúdo fictício. Nada aqui está implementado.</p>
+<div class="grid">
+<figure><figcaption><b>Atual</b> barra escura, turquesa, muito texto explicativo</figcaption><img src="dental_flow_ap_clinic_SPC_identity_before_agenda_desktop.png"></figure>
+<figure><figcaption><b>A · Conversa</b> lista com rostos, como o WhatsApp</figcaption><img id="a"></figure>
+<figure><figcaption><b>B · Próximo</b> quem é o próximo, como o Uber</figcaption><img id="b"></figure>
+<figure><figcaption><b>C · Sereno</b> saudação e cartões, como apps de bem-estar</figcaption><img id="c"></figure>
+</div></div>
+<script>for (const d of ['a', 'b', 'c']) document.getElementById(d).src = `dental_flow_ap_clinic_SPC_identity_${d}_agenda_desktop.png`;</script>
+</body></html>
