@@ -296,3 +296,23 @@ Estes itens são apenas cálculo sobre dados que já vêm da API: "Próximo · e
   5. O `pom.xml` pede Java 26, mas o projeto compila com 21.
   6. Sem o cabeçalho `X-Requested-With`, o 401 traz `WWW-Authenticate: Basic`, que abre a janela de login do navegador. O frontend já envia o cabeçalho.
 - **Limites:** sem teste com a cliente, leitor de tela ou dispositivo físico; o pacote JavaScript tem 639 kB.
+
+## 14. Ajustes depois do primeiro uso (28/10/2026)
+
+- **Sessão:** credenciais em `sessionStorage`, codificadas. O F5 não desconecta; fechar a aba ou ficar 30 minutos sem uso encerra a sessão. Ao reabrir, o frontend confirma o acesso em `/auth/me`. É provisório: a equipe vai migrar para JWT no backend.
+- **Correção no Estoque:** voltar de Equipamentos para Materiais quebrava a tela, porque os dados da aba anterior eram reaproveitados. Agora cada consulta só mostra dados da própria chave, e um erro numa tela aparece dentro do shell, com o menu.
+- **Agenda:**
+  - a linha "agora" atravessa a grade toda;
+  - clicar num horário vazio abre o agendamento já preenchido;
+  - as etapas da consulta mostram a situação atual como concluída e o próximo passo igual ao botão.
+- **Novas situações (cor e forma):**
+  - Agendado: tracejado e vazado.
+  - Confirmado: verde.
+  - Em atendimento: roxo cheio.
+  - Concluído: cinza.
+  - Cancelado e Faltou: hachurados.
+- **Agendar consulta:** resumo fixo ao lado no computador, barra inferior no celular, horários livres por período e correções de responsividade de 320 a 1440 px.
+- **Barra de cima:** o botão de busca solto foi removido.
+- **Logotipo:** versões em PNG transparente geradas a partir do símbolo original (prancha em `frontend/scripts/brand/out/export/prancha_logotipo.png`). Escolha do usuário em 28/10/2026:
+  - símbolo verde sem quadrado (versão 1) na barra de cima e na tela Entrar;
+  - ícone com o dente branco sobre verde (versão 3) como favicon e ícone de atalho (32, 180 e 512 px).
