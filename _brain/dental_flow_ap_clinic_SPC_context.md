@@ -3,14 +3,14 @@ kind: context
 ---
 # Contexto do Dental Flow
 
-Aplicação acadêmica para clínica odontológica. O código disponível é uma demonstração frontend: Painel, Agenda (com finalização de consulta), Pacientes, Doutores, Orçamentos/odontograma, Estoque, Caixa, Relatórios (diário, conferência, mensal e glosas), Administração (usuários, clínicas e auditoria), Login/Cadastro e Revisão.
+Aplicação acadêmica para clínica odontológica. Referência atual: frontend integrado à API, commit `87fbfcd0148346079a5476bd37de54cbea5c4f5d`, inspecionado em 29/10/2026. Escopo: Entrar, Hoje, Agenda, Pacientes, Clínica (dentistas, procedimentos e criação de acesso), Painel, Mapa do dia e Estoque (materiais/equipamentos). [SDD atual](module/dental_flow_ap_clinic_SPC_sdd.md).
 
-`frontend`, `documentos`, `backend` e `infra` são repositórios independentes e normalmente ficam lado a lado. Backend e infra contêm apenas READMEs na referência inicial desta migração.
+`frontend`, `documentos`, `backend` e `infra` são repositórios independentes e ficam lado a lado. Backend atual usa Java/Spring Boot; sua implementação não foi reauditada nesta revisão documental.
 
 Decisão confirmada: React + Vite + JavaScript/JSX + CSS Modules + MVVM. [Implementação e verificação atuais](../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md).
 
-Dados fictícios são locais, sob `dental_flow_demo_v1`, versão 1; preservar IDs, relações, histórico e registros do visitante. Clínicas, finalização e relatórios usam campos e coleções opcionais; registros anteriores ficam sem clínica até a vinculação manual. As visões de doutor e dona são telas locais, sem controle de acesso. Procedimento realizado não gera cobrança nem lançamento de Caixa. Não há contrato de API, autenticação efetiva ou permissões aplicadas pelo servidor.
+Dados vêm da API. Perfis atuais: DENTISTA e RECEPCIONISTA; clínica vem de /auth/me. Login por HTTP Basic, provisoriamente em sessionStorage, com inatividade de 30 minutos. Não tratar a demonstração antiga `dental_flow_demo_v1` como arquitetura atual. Orçamento/odontograma, Caixa independente, relatórios antigos e auditoria não têm rotas atuais; suas fontes históricas permanecem no Git e na comparação da SDD.
 
-Interface: português brasileiro, logotipo existente, IBM Plex Sans, foco visível e controles acessíveis. A mudança arquitetural preserva a interface. Estoque não permite saldo negativo; Caixa não recebe essa regra automaticamente.
+Interface atual: português brasileiro, direção A · Conversa, Figtree, tokens semânticos em `src/style/tokens.css`, CSS Modules e componentes próprios com primitivos Radix. Conflito de agenda apenas avisa; estoque valida saída contra saldo. Acessibilidade tem evidência automatizada e pendências explícitas, não certificação integral.
 
 As fichas são resumos. Decisões do usuário e especificações pertinentes devem ser distinguidas de exemplos, propostas e comportamento demonstrativo. Evidência local não equivale a publicação ou entrega integrada.

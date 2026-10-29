@@ -2,7 +2,13 @@
 kind: task
 status: implemented_and_validated
 ---
-# Tarefa atual
+# Tarefa atual — Entrega SDD
+
+Revisão documental de 29/10/2026: [planilha e Markdown SDD](../module/dental_flow_ap_clinic_SPC_sdd.md) alinhados ao frontend integrado no commit `87fbfcd0148346079a5476bd37de54cbea5c4f5d`. Preserva IDs antigos e explicita módulos ausentes. Código do frontend não alterado nesta tarefa. Validação: lint, 32 unitários e build aprovados; 60 E2E aprovados, 12 ignorados, sem falha, com API simulada. Commit e push do repositório de documentos autorizados pelo usuário em 29/10/2026; publicação da aplicação fora desta entrega.
+
+## Histórico da tarefa de 08/10/2026
+
+O registro abaixo corresponde à demonstração antiga; rotas, armazenamento e escopo foram substituídos pelo frontend integrado atual.
 
 Solicitação de 08/10/2026 implementada nas cinco entregas: listas compactas, formulários e Agenda; clínicas; finalização de consulta; relatório diário; relatório mensal e glosas. O usuário aprovou as telas e adotou os caminhos recomendados (“gostei siga todos os caminhos recomendados e faça a implementação”). [Entrega, decisões, evidência e limites](../../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_clinic_reports.md).
 

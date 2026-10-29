@@ -1,6 +1,12 @@
 # Dental Flow — Repositório de Documentação
 
-Este repositório corresponde à camada `e_doc` do ecossistema Dental Flow. Ele centraliza documentos de contexto, especificações, processos, modelos de dados e diagramas necessários para construir e operar o sistema de orçamento e gestão de estoque da clínica odontológica.
+Este repositório corresponde à camada `e_doc` do ecossistema Dental Flow. Ele centraliza documentos de contexto, especificações, processos, modelos de dados e diagramas da clínica odontológica. O frontend integrado atual atende Hoje, Agenda, Pacientes, Clínica, Painel, Mapa do dia e Estoque; requisitos históricos de orçamento e outros módulos permanecem rastreáveis, sem serem apresentados como funcionalidades atuais.
+
+## Entrega SDD atual
+
+A revisão de 29/10/2026 descreve o frontend integrado no commit `87fbfcd0148346079a5476bd37de54cbea5c4f5d`. A [planilha de especificação SDD](0_Context/b_brief/dental_flow_ap_clinic_SPC_frontend_brief.xlsx) e o [arquivo Markdown](1_SPC/c_design/dental_flow_ap_clinic_SPC_design.md) foram revisados juntos: 22 telas lógicas, 45 RFs com presença total ou parcial no escopo atual, 52 RFs originais comparados em auditoria e textos rastreados ao código. A planilha mantém o nome existente para preservar referências; a finalidade atual é especificação SDD.
+
+Validação desta revisão: `npm run check` aprovado (lint, 32 testes unitários e build); E2E com API simulada: 60 aprovados, 12 ignorados, nenhuma falha. Não reexecuta a API real, não certifica WCAG integral e não publica o sistema. O [resumo da SDD](_brain/module/dental_flow_ap_clinic_SPC_sdd.md) aponta as fontes e limitações. Os registros antigos de demonstração abaixo são históricos.
 
 ## Padrão para repositórios
 
