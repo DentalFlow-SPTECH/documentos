@@ -52,4 +52,9 @@ Commit e push autorizados pelo usuário em 28/10/2026 ("faça o commit e o push 
 - Frontend: branch `feat/refatoracao-usabilidade`, com os commits `4a17b66` (botão nativo de senha do Edge, alteração que já estava na cópia local) e `87fbfcd` (esta refatoração).
 - Documentação: branch `docs/refatoracao-usabilidade`, com o prompt reutilizável que já estava na cópia local e esta ficha.
 
-Os dois `main` não foram alterados; a integração depende de nova autorização. Publicação em Pages não acionada.
+Integração em `main` por fast-forward, autorizada pelo usuário em 28/10/2026 ("Integre os dois branches no main"):
+
+- Frontend: `main` foi de `6749ab0` para `87fbfcd`. O push foi confirmado: a `main` local e a remota estão no mesmo commit.
+- Documentação: integrada da mesma forma, no commit que contém este registro.
+
+Os branches continuam no remoto, nos mesmos commits. Publicação em Pages não acionada.
