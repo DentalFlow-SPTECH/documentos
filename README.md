@@ -102,6 +102,7 @@ Pastas sem artefatos têm `.gitkeep` para que a estrutura seja preservada pelo G
 - [Especificação de design](1_SPC/c_design/dental_flow_ap_clinic_SPC_design.md)
 - [Planilha de briefing de front-end](0_Context/b_brief/dental_flow_ap_clinic_SPC_frontend_brief.xlsx)
 - [Decisão da stack do frontend](0_Context/a_governance/dental_flow_ap_clinic_SPC_frontend_stack_decision.md)
+- [Prompt para gerar um frontend no padrão Dental Flow](0_Context/a_governance/dental_flow_ap_clinic_CHAT_frontend_generation_prompt.md)
 - [Arquitetura do frontend](1_SPC/b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md)
 - [Plano e evidências da refatoração](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md)
 - [Atualização visual — versão A](0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_visual_update.md)

@@ -9,6 +9,7 @@ Use este mapa quando precisar localizar informação. Uma correção simples pod
 - [Como usar e manter o brain](dental_flow_ap_clinic_SPC_brain_workflow.md): leitura seletiva, fontes, atualização e avaliação de consumo.
 - [Arquitetura](../1_SPC/b_technical/dental_flow_ap_clinic_SPC_frontend_architecture.md): camadas, dados e dependências.
 - [Decisão da stack](../0_Context/a_governance/dental_flow_ap_clinic_SPC_frontend_stack_decision.md): decisão do usuário e consequências.
+- [Prompt de geração de frontend](../0_Context/a_governance/dental_flow_ap_clinic_CHAT_frontend_generation_prompt.md): padrão reutilizável de processo, arquitetura, interface, dados, validação e armadilhas, para um frontend novo ou uma evolução.
 - [Plano e evidências](../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_refactor.md): etapas da migração.
 - [Atualização visual — versão A](../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_visual_update.md): escolha do usuário, escopo implementado e verificação atual.
 - [Busca de cadastros e padrão visual](../0_Context/c_delivery/dental_flow_ap_clinic_SPC_frontend_record_selection.md): continuação com seletores de pacientes/doutores e evidência atual.
